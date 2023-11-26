@@ -1,11 +1,8 @@
 package br.com.james.dto;
 
 import java.io.Serializable;
-import java.util.List;
 
-import br.com.james.models.Paciente;
-
-public class PsicologoDTO implements Serializable {
+public class PacienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,14 +14,14 @@ public class PsicologoDTO implements Serializable {
 
 	private String email;
 
-	private List<Paciente> pacientes;
+	private Long psicologo_id;
 
-	public List<Paciente> getPacientes() {
-		return pacientes;
+	public Long getPsicologo_id() {
+		return psicologo_id;
 	}
 
-	public void setPacientes(List<Paciente> pacientes) {
-		this.pacientes = pacientes;
+	public void setPsicologo_id(Long psicologo_id) {
+		this.psicologo_id = psicologo_id;
 	}
 
 	public Long getId() {

@@ -1,7 +1,6 @@
 package br.com.james.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,13 +8,14 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-@Entity(name = "psicologo")
-public class Psicologo implements Serializable {
+@Entity(name = "paciente")
+public class Paciente implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,14 +25,16 @@ public class Psicologo implements Serializable {
 
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
-
+	
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "psicologo_id", nullable = false)	
+	private Psicologo psicologo;
+	
 
-	@OneToMany(mappedBy = "psicologo", fetch = FetchType.LAZY)
-	private List<Paciente> pacientes;
-
-	public Psicologo() {
+	public Paciente() {
 	}
 
 	public Long getId() {
@@ -67,12 +69,15 @@ public class Psicologo implements Serializable {
 		this.email = email;
 	}
 
-	public List<Paciente> getPacientes() {
-		return pacientes;
+	public Psicologo getPsicologo() {
+		return psicologo;
 	}
 
-	public void setPacientes(List<Paciente> pacientes) {
-		this.pacientes = pacientes;
+	public void setPsicologo(Psicologo psicologo) {
+		this.psicologo = psicologo;
 	}
+	
+	
 
+	
 }

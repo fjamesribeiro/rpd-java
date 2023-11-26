@@ -22,7 +22,12 @@ public class PsicologoService {
 
 	public List<PsicologoDTO> findAll() {
 		logger.info("Finding All Psicologos");
-		return DozerMapper.parseListObjects(repository.findAll(), PsicologoDTO.class);
+
+		var ret = repository.findAll();
+
+		var ret2 = DozerMapper.parseListObjects(ret, PsicologoDTO.class);
+
+		return ret2;
 	}
 
 	public PsicologoDTO findById(Long id) {
