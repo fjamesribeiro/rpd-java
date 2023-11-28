@@ -2,6 +2,11 @@ package br.com.james.dto;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Data;
+
+@Data
 public class PacienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,46 +19,7 @@ public class PacienteDTO implements Serializable {
 
 	private String email;
 
-	private Long psicologo_id;
-
-	public Long getPsicologo_id() {
-		return psicologo_id;
-	}
-
-	public void setPsicologo_id(Long psicologo_id) {
-		this.psicologo_id = psicologo_id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	@JsonBackReference
+	private PsicologoDTO psicologo;
 
 }

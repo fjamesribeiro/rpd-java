@@ -1,7 +1,6 @@
 package br.com.james.services;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +11,12 @@ import br.com.james.mapper.DozerMapper;
 import br.com.james.models.Paciente;
 import br.com.james.repositories.PacienteRepository;
 import br.com.james.repositories.PsicologoRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class PacienteService {
 
-	private Logger logger = Logger.getLogger(PacienteService.class.getName());
 
 	@Autowired
 	private PsicologoRepository psicologoRepository;
@@ -25,12 +25,12 @@ public class PacienteService {
 	private PacienteRepository pacienteRepository;
 
 	public List<PacienteDTO> findAll() {
-		logger.info("Finding All Pacientes");
+		log.info("Finding All Pacientes");
 		return DozerMapper.parseListObjects(pacienteRepository.findAll(), PacienteDTO.class);
 	}
 
 	public PacienteDTO findById(Long id) {
-		logger.info("Finding One Paciente");
+		log.info("Finding One Paciente");
 		var ret = pacienteRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
@@ -40,11 +40,11 @@ public class PacienteService {
 	}
 
 	public PacienteDTO create(PacienteDTO dto) {
-		logger.info("Creating One Paciente");
+		log.info("Creating One Paciente");
 		var ent = DozerMapper.parseObject(dto, Paciente.class);
 
-		var psc = psicologoRepository.findById(dto.getPsicologo_id()).orElseThrow(() -> new ResourceNotFoundException(
-				"No records found for this Psicolodo ID: " + dto.getPsicologo_id()));
+		var psc = psicologoRepository.findById(dto.getPsicologo().getId()).orElseThrow(() -> new ResourceNotFoundException(
+				"No records found for this Psicolodo ID: " + dto.getPsicologo().getId()));
 
 		ent.setPsicologo(psc);
 		var ret = DozerMapper.parseObject(pacienteRepository.save(ent), PacienteDTO.class);
@@ -52,7 +52,7 @@ public class PacienteService {
 	}
 
 	public PacienteDTO update(PacienteDTO dto) {
-		logger.info("Updating One Paciente");
+		log.info("Updating One Paciente");
 
 		var ent = pacienteRepository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
@@ -65,7 +65,7 @@ public class PacienteService {
 	}
 
 	public void delete(Long id) {
-		logger.info("Deleting One Paciente");
+		log.info("Deleting One Paciente");
 
 		var ent = pacienteRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + id));
