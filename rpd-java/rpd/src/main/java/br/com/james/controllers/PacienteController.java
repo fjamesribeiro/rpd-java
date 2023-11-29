@@ -23,11 +23,17 @@ public class PacienteController {
 	@Autowired
 	private PacienteService service;
 
+//	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//	public List<PacienteDTO> findAll() {
+//		return service.findAll();
+//	}
+
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PacienteDTO> findAll() {
-		return service.findAll();
+	public String findAll2() {
+		return "paciente/create";
 	}
 
+	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PacienteDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
