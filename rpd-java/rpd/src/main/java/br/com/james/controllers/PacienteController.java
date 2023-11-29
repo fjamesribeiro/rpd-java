@@ -28,9 +28,9 @@ public class PacienteController {
 //		return service.findAll();
 //	}
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping()
 	public String findAll2() {
-		return "paciente/create";
+		return "home.html";
 	}
 
 	
