@@ -2,7 +2,7 @@ package br.com.james.services;
 
 import java.util.List;
 
-public interface CRUDService<T> {
+public interface iCRUDService<T> {
 	public List<T> findAll();
 
 	public T findById(Long id);

@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class PsicologoService implements CRUDService<PsicologoDTO> {
+public class PsicologoService implements iCRUDService<PsicologoDTO> {
 
 	@Autowired
 	private PsicologoRepository repository;

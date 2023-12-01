@@ -1,5 +1,8 @@
 package br.com.james.controllers;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,40 +14,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dto.PacienteDTO;
-import br.com.james.services.PacienteService;
+import br.com.james.dto.SentimentoDTO;
+import br.com.james.services.SentimentoService;
 
 @RestController
-@RequestMapping("/paciente")
-public class PacienteController {
+@RequestMapping("/sentimento")
+public class SentimentoController {
 
 	@Autowired
-	private PacienteService service;
+	private SentimentoService service;
 
-//	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//	public List<PacienteDTO> findAll() {
-//		return service.findAll();
-//	}
-
-	@GetMapping()
-	public String findAll2() {
-		return "home.html";
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<SentimentoDTO> findAll() {
+		return service.findAll();
 	}
 
-	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO findById(@PathVariable(value = "id") Long id) {
+	public SentimentoDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO create(@RequestBody() PacienteDTO dto) {
+	public SentimentoDTO create(@RequestBody() SentimentoDTO dto) {
 		return service.create(dto);
 	}
-	
+
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO update(@RequestBody() PacienteDTO dto) {
+	public SentimentoDTO update(@RequestBody() SentimentoDTO dto) {
 		return service.update(dto);
 	}
 

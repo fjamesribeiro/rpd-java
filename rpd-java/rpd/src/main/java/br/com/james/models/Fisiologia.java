@@ -26,7 +26,6 @@ public class Fisiologia implements Serializable {
 	@Column(name = "texto", nullable = false)
 	private String texto;
 
-	@JsonManagedReference
 	@ManyToMany(mappedBy = "fisiologias")
 	private Set<Rpd> rpds;
 	

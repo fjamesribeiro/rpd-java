@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class RpdService implements CRUDService<RpdDTO> {
+public class RpdService implements iCRUDService<RpdDTO> {
 
 	@Autowired
 	private RpdRepository repository;

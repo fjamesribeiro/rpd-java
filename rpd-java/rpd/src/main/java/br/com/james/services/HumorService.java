@@ -1,11 +1,13 @@
 package br.com.james.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.james.dto.HumorDTO;
+import br.com.james.dto.SentimentoDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
 import br.com.james.mapper.DozerMapper;
 import br.com.james.models.Humor;
@@ -14,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class HumorService implements CRUDService<HumorDTO> {
+public class HumorService implements iCRUDService<HumorDTO> {
 
 	@Autowired
 	private HumorRepository humorRepository;
@@ -33,6 +35,20 @@ public class HumorService implements CRUDService<HumorDTO> {
 
 		return ret2;
 	}
+	
+	
+	public Set<SentimentoDTO> findAllByHumorId(Long humorId) {
+		log.info("Finding Sentimentos by Humor");
+
+		Humor humor = humorRepository.findById(humorId)
+				.orElseThrow(() -> new ResourceNotFoundException("No records found for this Humor ID: " + humorId));
+
+		var sentimento = humor.getSentimentos();
+
+		var ret2 = DozerMapper.parseListObjects(sentimento, SentimentoDTO.class);
+
+		return ret2;
+	}	
 
 	public HumorDTO create(HumorDTO dto) {
 		log.info("Creating One Humore");
