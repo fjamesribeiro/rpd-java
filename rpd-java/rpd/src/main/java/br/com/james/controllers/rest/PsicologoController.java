@@ -1,4 +1,4 @@
-package br.com.james.controllers;
+package br.com.james.controllers.rest;
 
 import java.util.List;
 
@@ -13,34 +13,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dto.RpdDTO;
-import br.com.james.services.RpdService;
+import br.com.james.dto.PsicologoDTO;
+import br.com.james.services.PsicologoService;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/rpd")
-public class RpdController {
+@RequestMapping("/psicologo")
+public class PsicologoController {
 
 	@Autowired
-	private RpdService service;
+	private PsicologoService service;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<RpdDTO> findAll() {
+	public List<PsicologoDTO> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO findById(@PathVariable(value = "id") Long id) {
+	public PsicologoDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO create(@RequestBody() RpdDTO dto) {
+	public PsicologoDTO create(@Valid @RequestBody() PsicologoDTO dto) {
 		return service.create(dto);
 	}
-	
+
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO update(@RequestBody() RpdDTO dto) {
+	public PsicologoDTO update(@RequestBody() PsicologoDTO dto) {
 		return service.update(dto);
 	}
 

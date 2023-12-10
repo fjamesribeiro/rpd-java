@@ -1,15 +1,13 @@
 package br.com.james.services;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.james.dto.SentimentoDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.DozerMapper;
-import br.com.james.models.Humor;
+import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Sentimento;
 import br.com.james.repositories.HumorRepository;
 import br.com.james.repositories.SentimentoRepository;
@@ -27,7 +25,7 @@ public class SentimentoService implements iCRUDService<SentimentoDTO> {
 
 	public List<SentimentoDTO> findAll() {
 		log.info("Finding All Sentimentos");
-		return DozerMapper.parseListObjects(sentimentoRepository.findAll(), SentimentoDTO.class);
+		return ObjectMapperUtils.mapAll(sentimentoRepository.findAll(), SentimentoDTO.class);
 	}
 
 	public SentimentoDTO findById(Long id) {
@@ -35,16 +33,16 @@ public class SentimentoService implements iCRUDService<SentimentoDTO> {
 		var ret = sentimentoRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = DozerMapper.parseObject(ret, SentimentoDTO.class);
+		var ret2 = ObjectMapperUtils.map(ret, SentimentoDTO.class);
 
 		return ret2;
 	}
 
 	public SentimentoDTO create(SentimentoDTO dto) {
 		log.info("Creating One Sentimento");
-		var ent = DozerMapper.parseObject(dto, Sentimento.class);
+		var ent = ObjectMapperUtils.map(dto, Sentimento.class);
 
-		var ret = DozerMapper.parseObject(sentimentoRepository.save(ent), SentimentoDTO.class);
+		var ret = ObjectMapperUtils.map(sentimentoRepository.save(ent), SentimentoDTO.class);
 		return ret;
 	}
 
@@ -56,7 +54,7 @@ public class SentimentoService implements iCRUDService<SentimentoDTO> {
 
 		ent.setTexto(dto.getTexto());
 
-		return DozerMapper.parseObject(sentimentoRepository.save(ent), SentimentoDTO.class);
+		return ObjectMapperUtils.map(sentimentoRepository.save(ent), SentimentoDTO.class);
 	}
 
 	public void delete(Long id) {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.dto.PacienteDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.DozerMapper;
+import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Paciente;
 import br.com.james.repositories.PacienteRepository;
 import br.com.james.repositories.PsicologoRepository;
@@ -25,7 +25,7 @@ public class PacienteService implements iCRUDService<PacienteDTO> {
 
 	public List<PacienteDTO> findAll() {
 		log.info("Finding All Pacientes");
-		return DozerMapper.parseListObjects(pacienteRepository.findAll(), PacienteDTO.class);
+		return ObjectMapperUtils.mapAll(pacienteRepository.findAll(), PacienteDTO.class);
 	}
 
 	public PacienteDTO findById(Long id) {
@@ -33,21 +33,21 @@ public class PacienteService implements iCRUDService<PacienteDTO> {
 		var ret = pacienteRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = DozerMapper.parseObject(ret, PacienteDTO.class);
+		var ret2 = ObjectMapperUtils.map(ret, PacienteDTO.class);
 
 		return ret2;
 	}
 
 	public PacienteDTO create(PacienteDTO dto) {
 		log.info("Creating One Paciente");
-		var ent = DozerMapper.parseObject(dto, Paciente.class);
+		var ent = ObjectMapperUtils.map(dto, Paciente.class);
 
 		var psc = psicologoRepository.findById(dto.getPsicologo().getId())
 				.orElseThrow(() -> new ResourceNotFoundException(
 						"No records found for this Psicolodo ID: " + dto.getPsicologo().getId()));
 
 		ent.setPsicologo(psc);
-		var ret = DozerMapper.parseObject(pacienteRepository.save(ent), PacienteDTO.class);
+		var ret = ObjectMapperUtils.map(pacienteRepository.save(ent), PacienteDTO.class);
 		return ret;
 	}
 
@@ -61,7 +61,7 @@ public class PacienteService implements iCRUDService<PacienteDTO> {
 		ent.setFirstName(dto.getFirstName());
 		ent.setLastName(dto.getLastName());
 
-		return DozerMapper.parseObject(pacienteRepository.save(ent), PacienteDTO.class);
+		return ObjectMapperUtils.map(pacienteRepository.save(ent), PacienteDTO.class);
 	}
 
 	public void delete(Long id) {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.dto.RpdDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.DozerMapper;
+import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Rpd;
 import br.com.james.repositories.RpdRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class RpdService implements iCRUDService<RpdDTO> {
 
 		var ret = repository.findAll();
 
-		var ret2 = DozerMapper.parseListObjects(ret, RpdDTO.class);
+		var ret2 = ObjectMapperUtils.mapAll(ret, RpdDTO.class);
 
 		return ret2;
 	}
@@ -34,15 +34,15 @@ public class RpdService implements iCRUDService<RpdDTO> {
 		var ret = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = DozerMapper.parseObject(ret, RpdDTO.class);
+		var ret2 = ObjectMapperUtils.map(ret, RpdDTO.class);
 
 		return ret2;
 	}
 
 	public RpdDTO create(RpdDTO dto) {
 		log.info("Creating One Rpd");
-		var ent = DozerMapper.parseObject(dto, Rpd.class);
-		var ret = DozerMapper.parseObject(repository.save(ent), RpdDTO.class);
+		var ent = ObjectMapperUtils.map(dto, Rpd.class);
+		var ret = ObjectMapperUtils.map(repository.save(ent), RpdDTO.class);
 		return ret;
 	}
 
@@ -56,7 +56,7 @@ public class RpdService implements iCRUDService<RpdDTO> {
 		ent.setComportamento(dto.getComportamento());
 		ent.setSituacao(dto.getSituacao());
 
-		return DozerMapper.parseObject(repository.save(ent), RpdDTO.class);
+		return ObjectMapperUtils.map(repository.save(ent), RpdDTO.class);
 	}
 
 	public void delete(Long id) {

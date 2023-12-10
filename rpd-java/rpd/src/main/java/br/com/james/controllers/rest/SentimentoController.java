@@ -1,6 +1,7 @@
-package br.com.james.controllers;
+package br.com.james.controllers.rest;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,34 +14,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dto.HumorDTO;
-import br.com.james.services.HumorService;
+import br.com.james.dto.SentimentoDTO;
+import br.com.james.services.SentimentoService;
 
 @RestController
-@RequestMapping("/humor")
-public class HumorController {
+@RequestMapping("/sentimento")
+public class SentimentoController {
 
 	@Autowired
-	private HumorService service;
+	private SentimentoService service;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<HumorDTO> findAll() {
+	public List<SentimentoDTO> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public HumorDTO findById(@PathVariable(value = "id") Long id) {
+	public SentimentoDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public HumorDTO create(@RequestBody() HumorDTO dto) {
+	public SentimentoDTO create(@RequestBody() SentimentoDTO dto) {
 		return service.create(dto);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public HumorDTO update(@RequestBody() HumorDTO dto) {
+	public SentimentoDTO update(@RequestBody() SentimentoDTO dto) {
 		return service.update(dto);
 	}
 

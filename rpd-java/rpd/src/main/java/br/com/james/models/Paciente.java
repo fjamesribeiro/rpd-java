@@ -1,23 +1,25 @@
 package br.com.james.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "paciente")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Paciente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,12 +38,12 @@ public class Paciente implements Serializable {
 	private String lastName;
 
 	@JsonBackReference
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "psicologo_id", nullable = false)
 	private Psicologo psicologo;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "paciente")
-	private List<Rpd> rpds;
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "paciente")
+//	private List<Rpd> rpds;
 
 }

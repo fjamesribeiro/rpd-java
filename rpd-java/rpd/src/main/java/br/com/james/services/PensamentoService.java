@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.dto.PensamentoDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.DozerMapper;
+import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Pensamento;
 import br.com.james.repositories.PensamentoRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class PensamentoService implements iCRUDService<PensamentoDTO> {
 
 	public List<PensamentoDTO> findAll() {
 		log.info("Finding All Humores");
-		return DozerMapper.parseListObjects(pensamentoRepository.findAll(), PensamentoDTO.class);
+		return ObjectMapperUtils.mapAll(pensamentoRepository.findAll(), PensamentoDTO.class);
 	}
 
 	public PensamentoDTO findById(Long id) {
@@ -29,16 +29,16 @@ public class PensamentoService implements iCRUDService<PensamentoDTO> {
 		var ret = pensamentoRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = DozerMapper.parseObject(ret, PensamentoDTO.class);
+		var ret2 = ObjectMapperUtils.map(ret, PensamentoDTO.class);
 
 		return ret2;
 	}
 
 	public PensamentoDTO create(PensamentoDTO dto) {
 		log.info("Creating One Humore");
-		var ent = DozerMapper.parseObject(dto, Pensamento.class);
+		var ent = ObjectMapperUtils.map(dto, Pensamento.class);
 
-		var ret = DozerMapper.parseObject(pensamentoRepository.save(ent), PensamentoDTO.class);
+		var ret = ObjectMapperUtils.map(pensamentoRepository.save(ent), PensamentoDTO.class);
 		return ret;
 	}
 
@@ -50,7 +50,7 @@ public class PensamentoService implements iCRUDService<PensamentoDTO> {
 
 		ent.setTexto(dto.getTexto());
 
-		return DozerMapper.parseObject(pensamentoRepository.save(ent), PensamentoDTO.class);
+		return ObjectMapperUtils.map(pensamentoRepository.save(ent), PensamentoDTO.class);
 	}
 
 	public void delete(Long id) {

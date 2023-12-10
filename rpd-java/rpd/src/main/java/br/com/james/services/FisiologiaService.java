@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.dto.FisiologiaDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.DozerMapper;
+import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Fisiologia;
 import br.com.james.repositories.FisiologiaRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class FisiologiaService implements iCRUDService<FisiologiaDTO> {
 
 	public List<FisiologiaDTO> findAll() {
 		log.info("Finding All Pacientes");
-		return DozerMapper.parseListObjects(fisiologiaRepository.findAll(), FisiologiaDTO.class);
+		return ObjectMapperUtils.mapAll(fisiologiaRepository.findAll(), FisiologiaDTO.class);
 	}
 
 	public FisiologiaDTO findById(Long id) {
@@ -29,16 +29,16 @@ public class FisiologiaService implements iCRUDService<FisiologiaDTO> {
 		var ret = fisiologiaRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = DozerMapper.parseObject(ret, FisiologiaDTO.class);
+		var ret2 = ObjectMapperUtils.map(ret, FisiologiaDTO.class);
 
 		return ret2;
 	}
 
 	public FisiologiaDTO create(FisiologiaDTO dto) {
 		log.info("Creating One Paciente");
-		var ent = DozerMapper.parseObject(dto, Fisiologia.class);
+		var ent = ObjectMapperUtils.map(dto, Fisiologia.class);
 
-		var ret = DozerMapper.parseObject(fisiologiaRepository.save(ent), FisiologiaDTO.class);
+		var ret = ObjectMapperUtils.map(fisiologiaRepository.save(ent), FisiologiaDTO.class);
 		return ret;
 	}
 
@@ -50,7 +50,7 @@ public class FisiologiaService implements iCRUDService<FisiologiaDTO> {
 
 		ent.setTexto(dto.getTexto());
 
-		return DozerMapper.parseObject(fisiologiaRepository.save(ent), FisiologiaDTO.class);
+		return ObjectMapperUtils.map(fisiologiaRepository.save(ent), FisiologiaDTO.class);
 	}
 
 	public void delete(Long id) {

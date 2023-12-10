@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.james.dto.HumorDTO;
 import br.com.james.dto.SentimentoDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.DozerMapper;
+import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Humor;
 import br.com.james.repositories.HumorRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class HumorService implements iCRUDService<HumorDTO> {
 
 	public List<HumorDTO> findAll() {
 		log.info("Finding All Humores");
-		return DozerMapper.parseListObjects(humorRepository.findAll(), HumorDTO.class);
+		return ObjectMapperUtils.mapAll(humorRepository.findAll(), HumorDTO.class);
 	}
 
 	public HumorDTO findById(Long id) {
@@ -31,7 +31,7 @@ public class HumorService implements iCRUDService<HumorDTO> {
 		var ret = humorRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = DozerMapper.parseObject(ret, HumorDTO.class);
+		var ret2 = ObjectMapperUtils.map(ret, HumorDTO.class);
 
 		return ret2;
 	}
@@ -45,16 +45,16 @@ public class HumorService implements iCRUDService<HumorDTO> {
 
 		var sentimento = humor.getSentimentos();
 
-		var ret2 = DozerMapper.parseListObjects(sentimento, SentimentoDTO.class);
+		var ret2 = ObjectMapperUtils.mapAllSet(sentimento, SentimentoDTO.class);
 
 		return ret2;
 	}	
 
 	public HumorDTO create(HumorDTO dto) {
 		log.info("Creating One Humore");
-		var ent = DozerMapper.parseObject(dto, Humor.class);
+		var ent = ObjectMapperUtils.map(dto, Humor.class);
 
-		var ret = DozerMapper.parseObject(humorRepository.save(ent), HumorDTO.class);
+		var ret = ObjectMapperUtils.map(humorRepository.save(ent), HumorDTO.class);
 		return ret;
 	}
 
@@ -66,7 +66,7 @@ public class HumorService implements iCRUDService<HumorDTO> {
 
 		ent.setTexto(dto.getTexto());
 
-		return DozerMapper.parseObject(humorRepository.save(ent), HumorDTO.class);
+		return ObjectMapperUtils.map(humorRepository.save(ent), HumorDTO.class);
 	}
 
 	public void delete(Long id) {

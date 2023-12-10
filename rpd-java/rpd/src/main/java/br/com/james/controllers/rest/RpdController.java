@@ -1,4 +1,6 @@
-package br.com.james.controllers;
+package br.com.james.controllers.rest;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,40 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dto.PacienteDTO;
-import br.com.james.services.PacienteService;
+import br.com.james.dto.RpdDTO;
+import br.com.james.services.RpdService;
 
 @RestController
-@RequestMapping("/paciente")
-public class PacienteController {
+@RequestMapping("/rpd")
+public class RpdController {
 
 	@Autowired
-	private PacienteService service;
+	private RpdService service;
 
-//	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//	public List<PacienteDTO> findAll() {
-//		return service.findAll();
-//	}
-
-	@GetMapping()
-	public String findAll2() {
-		return "home.html";
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<RpdDTO> findAll() {
+		return service.findAll();
 	}
 
-	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO findById(@PathVariable(value = "id") Long id) {
+	public RpdDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO create(@RequestBody() PacienteDTO dto) {
+	public RpdDTO create(@RequestBody() RpdDTO dto) {
 		return service.create(dto);
 	}
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO update(@RequestBody() PacienteDTO dto) {
+	public RpdDTO update(@RequestBody() RpdDTO dto) {
 		return service.update(dto);
 	}
 
