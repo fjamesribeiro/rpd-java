@@ -13,6 +13,7 @@
 					<th scope="col">Nome</th>
 					<th scope="col">Sobrenome</th>
 					<th scope="col">Email</th>
+					<th scope="col">Psicólogo</th>
 					<th scope="col">#</th>
 				</tr>
 			</thead>
@@ -22,9 +23,10 @@
 					<td th:text="${paciente.firstName}" />
 					<td th:text="${paciente.lastName}" />
 					<td th:text="${paciente.email}" />
+					<td th:text="${paciente.psicologo.firstName} + ' ' + ${paciente.psicologo.lastName}" />
 					<td>
-						<a th:href="@{'/psc/edit/'+${paciente.id}}">Editar</a>
-						<a th:href="@{'/psc/del/'+${paciente.id}}">Excluir</a>
+						<a th:href="@{'/pac/edit/'+${paciente.id}}">Editar</a>
+						<a th:href="@{'/pac/del/'+${paciente.id}}">Excluir</a>
 					</td>
 				</tr>
 			</tbody>

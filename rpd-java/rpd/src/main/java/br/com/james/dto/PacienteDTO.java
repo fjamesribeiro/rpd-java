@@ -29,7 +29,6 @@ public class PacienteDTO implements Serializable {
 	@Email
 	private String email;
 
-	@JsonBackReference
 	@NotEmpty
 	private PsicologoDTO psicologo;
 

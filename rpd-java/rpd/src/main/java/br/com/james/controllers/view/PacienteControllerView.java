@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.james.dto.PacienteDTO;
-import br.com.james.dto.PsicologoDTO;
 import br.com.james.services.PacienteService;
+import br.com.james.services.PsicologoService;
 
 @Controller
 @RequestMapping("/pac")
@@ -19,11 +19,19 @@ public class PacienteControllerView {
 	@Autowired
 	private PacienteService service;
 
+	@Autowired
+	private PsicologoService psicologoService;
+
 	@GetMapping("/create")
 	public ModelAndView create() {
 		ModelAndView andView = new ModelAndView("/paciente/create");
-		PsicologoDTO dto = new PsicologoDTO();
+		PacienteDTO dto = new PacienteDTO();
+
+		var psicologos = psicologoService.findAll();
+
 		andView.addObject("paciente", dto);
+		andView.addObject("psicologos", psicologos);
+
 		return andView;
 	}
 
@@ -37,9 +45,14 @@ public class PacienteControllerView {
 
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {
-		var ret = service.findById(id);
 		ModelAndView andView = new ModelAndView("/paciente/create");
-		andView.addObject("paciente", ret);
+		
+		var paciente = service.findById(id);
+		andView.addObject("paciente", paciente);
+
+		var listPsicologos = psicologoService.findAll();
+		andView.addObject("listPsicologos", listPsicologos);
+
 		return andView;
 	}
 
@@ -51,6 +64,7 @@ public class PacienteControllerView {
 
 	@PostMapping()
 	public String post(PacienteDTO dto) {
+		System.out.println(dto);
 		if (dto.getId() == null) {
 			service.create(dto);
 		} else {

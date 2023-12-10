@@ -3,7 +3,7 @@ package br.com.james.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -30,7 +30,7 @@ public class PsicologoDTO implements Serializable {
 	@Email
 	private String email;
 
-	@JsonManagedReference
+	@JsonIgnore
 	private List<PacienteDTO> pacientes;
 
 }

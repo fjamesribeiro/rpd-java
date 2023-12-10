@@ -6,22 +6,33 @@
 <body>
 	<header th:replace="~{fragmentos :: header}" />
 	<div class="container">
-		<form method="post" action="/psc" th:object="${paciente}">
-			<input type="hidden" id="id" name="id" th:value="${paciente.id}" />
+		<form method="post" action="/pac" th:object="${paciente}">
+			<input type="hidden" th:field="*{id}" th:value="${paciente.id}" />
+
 			<div class="mb-3">
 				<label for="firstName" class="form-label">Nome</label>
-				<input type="text" class="form-control" id="fisrtName" name="firstName"
-					th:value="${paciente.firstName}" />
+				<input type="text" class="form-control" th:field="*{firstName}" />
 			</div>
+
 			<div class="mb-3">
 				<label for="lastName" class="form-label">Sobrenome</label>
-				<input type="text" class="form-control" id="lastName" name="lastName"
-					th:value="${paciente.lastName}" />
+				<input type="text" class="form-control" th:field="*{lastName}" />
 			</div>
+
 			<div class="mb-3">
-				<label for="exampleInputEmail1" class="form-label">Email</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-					name="email" th:value="${paciente.email}" />
+				<label for="email" class="form-label">Email</label>
+				<input type="email" class="form-control" th:field="*{email}" />
+			</div>
+
+			<div class="mb-3">
+				<label for="psicologos" class="form-label">Psicólogo</label>
+
+				<select class="form-select" id="psicologos" th:field="*{psicologo}">
+					<th:block th:each="psc : ${listPsicologos}">
+						<option th:text="${psc.firstName} + ' ' + ${psc.lastName}" th:value="${psc.id}" />
+					</th:block>
+				</select>
+
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
