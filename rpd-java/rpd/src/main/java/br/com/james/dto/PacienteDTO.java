@@ -2,8 +2,6 @@ package br.com.james.dto;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -29,7 +27,6 @@ public class PacienteDTO implements Serializable {
 	@Email
 	private String email;
 
-	@NotEmpty
 	private PsicologoDTO psicologo;
 
 //	@JsonBackReference

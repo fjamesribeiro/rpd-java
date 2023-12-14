@@ -27,7 +27,7 @@
 			<div class="mb-3">
 				<label for="psicologos" class="form-label">Psicólogo</label>
 
-				<select class="form-select" id="psicologos" th:field="*{psicologo}">
+				<select class="form-select" id="psicologos" th:field="*{psicologo.id}">
 					<th:block th:each="psc : ${listPsicologos}">
 						<option th:text="${psc.firstName} + ' ' + ${psc.lastName}" th:value="${psc.id}" />
 					</th:block>
