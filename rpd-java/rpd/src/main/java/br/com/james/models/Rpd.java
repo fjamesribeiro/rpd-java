@@ -50,8 +50,9 @@ public class Rpd implements Serializable {
 	private List<Pensamento> pensamentos;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "rpd")
-	private List<Humor> humores;
+	@ManyToOne()
+	@JoinColumn(name = "humor_id")
+	private Humor humor;
 
 	@ManyToMany()
 	@JoinTable(name = "rpd_fisiologia", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "fisiologia_id"))

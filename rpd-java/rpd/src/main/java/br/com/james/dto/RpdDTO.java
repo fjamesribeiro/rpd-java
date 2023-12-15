@@ -8,6 +8,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.james.models.Humor;
 import lombok.Data;
 
 @Data
@@ -30,7 +31,7 @@ public class RpdDTO implements Serializable {
 	private List<PensamentoDTO> pensamentos;
 
 	@JsonManagedReference
-	private List<HumorDTO> humores;
+	private Humor humor;
 
 	private Set<FisiologiaDTO> fisiologias;
 

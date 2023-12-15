@@ -1,6 +1,7 @@
 package br.com.james.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.james.dto.SentimentoDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
 import br.com.james.mapper.ObjectMapperUtils;
+import br.com.james.models.Humor;
 import br.com.james.models.Sentimento;
 import br.com.james.repositories.HumorRepository;
 import br.com.james.repositories.SentimentoRepository;
@@ -27,6 +29,19 @@ public class SentimentoService implements iCRUDService<SentimentoDTO> {
 		log.info("Finding All Sentimentos");
 		return ObjectMapperUtils.mapAll(sentimentoRepository.findAll(), SentimentoDTO.class);
 	}
+	
+	public Set<SentimentoDTO> findAllByHumorId(Long humorId) {
+		log.info("Finding Sentimentos by Humor");
+
+		Humor humor = humorRepository.findById(humorId)
+				.orElseThrow(() -> new ResourceNotFoundException("No records found for this Humor ID: " + humorId));
+
+		var sentimento = humor.getSentimentos();
+
+		var ret2 = ObjectMapperUtils.mapAllSet(sentimento, SentimentoDTO.class);
+
+		return ret2;
+	}		
 
 	public SentimentoDTO findById(Long id) {
 		log.info("Finding One Sentimento");

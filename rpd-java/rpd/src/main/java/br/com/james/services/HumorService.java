@@ -27,7 +27,7 @@ public class HumorService implements iCRUDService<HumorDTO> {
 	}
 
 	public HumorDTO findById(Long id) {
-		log.info("Finding One Humore");
+		log.info("Finding One Humor");
 		var ret = humorRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
@@ -36,20 +36,6 @@ public class HumorService implements iCRUDService<HumorDTO> {
 		return ret2;
 	}
 	
-	
-	public Set<SentimentoDTO> findAllByHumorId(Long humorId) {
-		log.info("Finding Sentimentos by Humor");
-
-		Humor humor = humorRepository.findById(humorId)
-				.orElseThrow(() -> new ResourceNotFoundException("No records found for this Humor ID: " + humorId));
-
-		var sentimento = humor.getSentimentos();
-
-		var ret2 = ObjectMapperUtils.mapAllSet(sentimento, SentimentoDTO.class);
-
-		return ret2;
-	}	
-
 	public HumorDTO create(HumorDTO dto) {
 		log.info("Creating One Humore");
 		var ent = ObjectMapperUtils.map(dto, Humor.class);
