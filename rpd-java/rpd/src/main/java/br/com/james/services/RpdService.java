@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import br.com.james.dto.RpdDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
 import br.com.james.mapper.ObjectMapperUtils;
+import br.com.james.models.Fisiologia;
 import br.com.james.models.Rpd;
+import br.com.james.models.Sentimento;
 import br.com.james.repositories.RpdRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +56,11 @@ public class RpdService implements iCRUDService<RpdDTO> {
 
 		ent.setData(dto.getData());
 		ent.setComportamento(dto.getComportamento());
+		ent.setHumor(dto.getHumor());
+		ent.setSentimentos(ObjectMapperUtils.mapAllSet(dto.getSentimentos(), Sentimento.class));
+		ent.setFisiologias(ObjectMapperUtils.mapAllSet(dto.getFisiologias(), Fisiologia.class));
 		ent.setSituacao(dto.getSituacao());
+		ent.setPensamento(dto.getPensamento());
 
 		return ObjectMapperUtils.map(repository.save(ent), RpdDTO.class);
 	}

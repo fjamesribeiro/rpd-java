@@ -32,13 +32,22 @@
 
 		<form method="post" action="/rpd" th:object="${rpd}">
 
-			<input type="hidden" id="id" name="id" th:value="${rpd.id}" />
+			<input type="hidden" th:field="*{id}" />
+
+			<div class="mb-3" role="group">
+				<label for="pacientes" class="form-label">Paciente</label>
+
+				<select class="form-select" id="pacientes" th:field="*{paciente.id}">
+					<th:block th:each="p : ${listPacientes}">
+						<option th:text="${p.firstName} + ' ' + ${p.LastName}" th:value="${p.id}" />
+					</th:block>
+				</select>
+			</div>
 
 			<div class="mb-3">
 				<label class="form-label" for="data">Data</label>
 				<input type="date" class="form-control" th:field="*{data}" />
 			</div>
-
 
 			<div class="mb-3" role="group">
 				<label for="humores" class="form-label">Como está seu Humor?</label>
@@ -56,33 +65,46 @@
 				<input type="text" class="form-control" th:field="*{situacao}" />
 			</div>
 
+			<div class="mb-3">
+				<label class="form-label" for="pensamento">Que pensamento você teve?</label>
+
+				<input type="text" class="form-control" th:field="*{pensamento}" />
+			</div>
 
 			<div class="mb-3" role="group">
 				<label class="form-label">Como você está se sentindo?</label>
 
 				<div class="mb-3" role="group">
-					<th:block th:each="ls : ${listSentimentos}">
-						<input class="form-check-input" type="checkbox" th:value="${ls.id}" />
-						<label class="form-check-label" th:text="${ls.texto}"></label>
+					<th:block th:each="sentimento : ${listSentimentos}">
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" th:field="*{sentimentos}"
+								th:value="${sentimento.id}" />
+							<label class="form-check-label" th:for="${#ids.prev('sentimentos')}"
+								th:text="${sentimento.texto}"></label>
+						</div>
 					</th:block>
 				</div>
 			</div>
 
-			<div class="mb-3">
+			<div class="mb-3" role="group">
 				<label class="form-label">Que reações corporais você teve?</label>
 
 				<div class="mb-3" role="group">
-					<th:block th:each="lf : ${listFisiologias}">
-						<input class="form-check-input" type="checkbox" th:value="${lf.id}" />
-						<label class="form-check-label" th:text="${lf.texto}"></label>
+					<th:block th:each="fisilolgia : ${listFisiologias}">
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" th:field="*{fisiologias}"
+								th:value="${fisilolgia.id}" />
+							<label class="form-check-label" th:for="${#ids.prev('fisiologias')}"
+								th:text="${fisilolgia.texto}"></label>
+						</div>
 					</th:block>
 				</div>
 			</div>
 
 			<div class="mb-3">
-				<label class="form-label" for="pensamento">Que pensamentos você teve?</label>
+				<label class="form-label" for="pensamento">O que você fez?</label>
 
-				<input type="text" class="form-control" th:field="*{pensamentos}" />
+				<input type="text" class="form-control" th:field="*{comportamento}" />
 			</div>
 
 			<div class="mb-3" role="group">

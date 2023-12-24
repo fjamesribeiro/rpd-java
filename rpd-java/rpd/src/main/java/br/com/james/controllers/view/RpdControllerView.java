@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.james.dto.RpdDTO;
 import br.com.james.services.FisiologiaService;
 import br.com.james.services.HumorService;
+import br.com.james.services.PacienteService;
 import br.com.james.services.RpdService;
 import br.com.james.services.SentimentoService;
 
@@ -30,22 +31,25 @@ public class RpdControllerView {
 	@Autowired
 	private FisiologiaService fisiologiaService;
 
+	@Autowired
+	private PacienteService pacienteService;
+
 	@GetMapping("/create")
 	public ModelAndView create() {
 		ModelAndView andView = new ModelAndView("/rpd/create");
 		RpdDTO dto = new RpdDTO();
 
-		var listHumores = humorService.findAll();
-
-		//TODO: remove o 1L
+		// TODO: remove o 1L
 		var listSentimentos = sentimentoService.findAllByHumorId(1L);
-		
+		var listHumores = humorService.findAll();
 		var listFisiologias = fisiologiaService.findAll();
+		var listPacientes = pacienteService.findAll();
 
 		andView.addObject("rpd", dto);
 		andView.addObject("listHumores", listHumores);
 		andView.addObject("listSentimentos", listSentimentos);
 		andView.addObject("listFisiologias", listFisiologias);
+		andView.addObject("listPacientes", listPacientes);
 
 		return andView;
 	}
@@ -63,10 +67,18 @@ public class RpdControllerView {
 		ModelAndView andView = new ModelAndView("/rpd/create");
 
 		var rpd = service.findById(id);
-		andView.addObject("rpd", rpd);
-
 		var listHumores = humorService.findAll();
+		var listPacientes = pacienteService.findAll();
+		var listFisiologias = fisiologiaService.findAll();
+
+		// TODO: remove o 1L
+		var listSentimentos = sentimentoService.findAllByHumorId(1L);
+
+		andView.addObject("listFisiologias", listFisiologias);
 		andView.addObject("listHumores", listHumores);
+		andView.addObject("rpd", rpd);
+		andView.addObject("listPacientes", listPacientes);
+		andView.addObject("listSentimentos", listSentimentos);
 
 		return andView;
 	}

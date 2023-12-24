@@ -20,12 +20,12 @@ public class FisiologiaService implements iCRUDService<FisiologiaDTO> {
 	private FisiologiaRepository fisiologiaRepository;
 
 	public List<FisiologiaDTO> findAll() {
-		log.info("Finding All Pacientes");
+		log.info("Finding All Fisiologias");
 		return ObjectMapperUtils.mapAll(fisiologiaRepository.findAll(), FisiologiaDTO.class);
 	}
 
 	public FisiologiaDTO findById(Long id) {
-		log.info("Finding One Paciente");
+		log.info("Finding One Fisiologia");
 		var ret = fisiologiaRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
@@ -35,7 +35,7 @@ public class FisiologiaService implements iCRUDService<FisiologiaDTO> {
 	}
 
 	public FisiologiaDTO create(FisiologiaDTO dto) {
-		log.info("Creating One Paciente");
+		log.info("Creating One Fisiologia");
 		var ent = ObjectMapperUtils.map(dto, Fisiologia.class);
 
 		var ret = ObjectMapperUtils.map(fisiologiaRepository.save(ent), FisiologiaDTO.class);
@@ -43,7 +43,7 @@ public class FisiologiaService implements iCRUDService<FisiologiaDTO> {
 	}
 
 	public FisiologiaDTO update(FisiologiaDTO dto) {
-		log.info("Updating One Paciente");
+		log.info("Updating One Fisiologia");
 
 		var ent = fisiologiaRepository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));

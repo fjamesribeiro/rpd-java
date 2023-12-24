@@ -1,9 +1,10 @@
 package br.com.james.models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -18,11 +19,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "rpd")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Rpd implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +36,8 @@ public class Rpd implements Serializable {
 	private Long id;
 
 	@Column(name = "data")
-	private LocalDate data;
+	@DateTimeFormat(pattern = "dd/MM/YYYY")
+	private Date data;
 
 	@Column(name = "situacao")
 	private String situacao;
@@ -45,9 +50,8 @@ public class Rpd implements Serializable {
 	@JoinColumn(name = "paciente_id", nullable = false)
 	private Paciente paciente;
 
-	@JsonManagedReference
-	@OneToMany(mappedBy = "rpd")
-	private List<Pensamento> pensamentos;
+	@Column(name = "pensamento")
+	private String pensamento;
 
 	@JsonManagedReference
 	@ManyToOne()

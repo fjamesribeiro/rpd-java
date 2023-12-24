@@ -3,8 +3,6 @@ package br.com.james.dto;
 import java.io.Serializable;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +19,12 @@ public class SentimentoDTO implements Serializable {
 	private String texto;
 
 	private Set<RpdDTO> rpds;
-	
+
 	private Set<HumorDTO> humores;
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getId().toString();
+	}
 }

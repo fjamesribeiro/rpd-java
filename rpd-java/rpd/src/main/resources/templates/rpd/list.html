@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos :: head}" />
+
+<body>
+	<header th:replace="~{fragmentos :: header}" />
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Data</th>
+					<th scope="col">Situação</th>
+					<th scope="col">Comportamento</th>
+					<th scope="col">#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="rpd: ${rpds}">
+					<td th:text="${rpd.id}" />
+					<td th:text="${{rpd.data}}" />
+					<td th:text="${rpd.situacao}" />
+					<td th:text="${rpd.comportamento}" />
+					<td>
+						<a th:href="@{'/rpd/edit/'+${rpd.id}}">Editar</a>
+						<a th:href="@{'/rpd/del/'+${rpd.id}}">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

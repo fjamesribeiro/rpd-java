@@ -3,9 +3,13 @@ package br.com.james.dto;
 import java.io.Serializable;
 import java.util.Set;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class FisiologiaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -15,4 +19,11 @@ public class FisiologiaDTO implements Serializable {
 	private String texto;
 
 	private Set<RpdDTO> rpds;
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getId().toString();
+	}
+	
 }

@@ -1,24 +1,33 @@
 package br.com.james.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.james.models.Humor;
-import lombok.Data;
+import br.com.james.utils.converter.StringToFisiologiaConverter;
+import br.com.james.utils.converter.StringToSentimentoConverter;
+import jakarta.persistence.Convert;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class RpdDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
-	private LocalDate data;
+	@DateTimeFormat(pattern = "dd/MM/YYYY")
+	private Date data;
 
 	private String situacao;
 
@@ -27,14 +36,15 @@ public class RpdDTO implements Serializable {
 	@JsonBackReference
 	private PacienteDTO paciente;
 
-	@JsonManagedReference
-	private List<PensamentoDTO> pensamentos;
+	private String pensamento;
 
 	@JsonManagedReference
 	private Humor humor;
 
+	@Convert(converter = StringToFisiologiaConverter.class)
 	private Set<FisiologiaDTO> fisiologias;
 
+	@Convert(converter = StringToSentimentoConverter.class)
 	private Set<SentimentoDTO> sentimentos;
 
 }
