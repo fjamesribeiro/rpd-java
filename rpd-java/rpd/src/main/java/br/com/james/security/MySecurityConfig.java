@@ -16,19 +16,13 @@ public class MySecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf().disable().authorizeHttpRequests().
-		requestMatchers(HttpMethod.GET, "/home").permitAll()
+		requestMatchers(HttpMethod.POST, "/login").permitAll()
 		.anyRequest().authenticated().and().cors();
 
 		http.addFilterBefore(new MyFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
-
-//		http.cors(cors -> cors.disable()).csrf(csrf -> csrf.disable())
-//        .authorizeHttpRequests(authorizeRequests -> 
-//             authorizeRequests.anyMatchers("/admins-only/**").hasAuthority(ADMIN)
-//                .antMatchers(HttpMethod.GET, "/**").permitAll()
-//                .anyRequest()
-//                .authenticated());		
+	
 
 	}
 
