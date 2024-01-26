@@ -11,3 +11,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
+  security:
+    oauth2:
+      basic:
+        enable: false
+      client:
+        registration:   
+          google:   
+            client-id: 787222402243-inil9burg0rtq015qdv0utnjt7k4s148.apps.googleusercontent.com
+            client-secret: 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
