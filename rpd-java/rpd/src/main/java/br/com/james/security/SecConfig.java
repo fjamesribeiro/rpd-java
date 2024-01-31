@@ -21,9 +21,10 @@ public class SecConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.csrf(Customizer.withDefaults())
-				.authorizeHttpRequests(request -> request.requestMatchers("/login", "/css/**", "/js/**", "/images/**")
-						.permitAll().anyRequest().authenticated())
-//				.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/home", true))
+				.authorizeHttpRequests(request -> request
+						.requestMatchers("/login", "/css/**", "/js/**", "/images/**").permitAll()
+						.anyRequest().authenticated())
+				.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/home", true))
 				.oauth2Login(oauth2 -> oauth2.loginPage("/login").defaultSuccessUrl("/", true)).build();
 	}
 }

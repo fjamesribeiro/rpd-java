@@ -13,10 +13,8 @@ spring:
     show-sql: true
   security:
     oauth2:
-      basic:
-        enable: false
       client:
         registration:   
           google:   
-            client-id: 787222402243-inil9burg0rtq015qdv0utnjt7k4s148.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 787222402243-ugl7l5qt2o6m66j97e2dn9rufvm04sam.apps.googleusercontent.com
+            client-secret: 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
