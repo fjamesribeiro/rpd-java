@@ -18,10 +18,10 @@ public class PacienteDTO implements Serializable {
 	private Long id;
 
 	@NotEmpty
-	private String firstName;
+	private String nome;
 
 	@NotEmpty
-	private String lastName;
+	private String sobrenome;
 
 	@NotEmpty
 	@Email

@@ -54,9 +54,6 @@ public class PsicologoService implements iCRUDService<PsicologoDTO> {
 		var ent = repository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		ent.setEmail(dto.getEmail());
-		ent.setFirstName(dto.getFirstName());
-		ent.setLastName(dto.getLastName());
 
 		return ObjectMapperUtils.map(repository.save(ent), PsicologoDTO.class);
 	}

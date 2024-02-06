@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PsicologoDTO implements Serializable {
+public class UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,8 +29,18 @@ public class PsicologoDTO implements Serializable {
 	@NotBlank
 	@Email
 	private String email;
+	
+	@NotBlank
+	@Email
+	private String senha;
 
 	@JsonIgnore
-	private List<PacienteDTO> pacientes;
+	private PacienteDTO paciente;
+
+	@JsonIgnore
+	private PsicologoDTO psicologo;
+	
+	@JsonIgnore
+	private List<RoleDTO> roles;
 
 }
