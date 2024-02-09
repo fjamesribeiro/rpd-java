@@ -18,7 +18,7 @@ import br.com.james.services.PsicologoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/psicologo")
+@RequestMapping("/rest/psc")
 public class PsicologoController {
 
 	@Autowired

@@ -1,6 +1,7 @@
 package br.com.james.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Psicologo implements Serializable {
+public class Psicologo extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,6 +37,6 @@ public class Psicologo implements Serializable {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "psicologo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Paciente> pacientes;
+	private List<Paciente> pacientes = new ArrayList<>();
 
 }

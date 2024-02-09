@@ -17,7 +17,7 @@ import br.com.james.dto.RpdDTO;
 import br.com.james.services.RpdService;
 
 @RestController
-@RequestMapping("/rpd")
+@RequestMapping("/rest/rpd")
 public class RpdController {
 
 	@Autowired

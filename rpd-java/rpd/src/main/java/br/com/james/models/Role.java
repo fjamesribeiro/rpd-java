@@ -1,10 +1,14 @@
 package br.com.james.models;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role implements Serializable {
+public class Role implements Serializable, GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,10 +29,16 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column()
-	private String nome;
+	@Column(nullable = false, unique = true)
+	@Enumerated(EnumType.STRING)
+	private RoleName nome;
 
 	@ManyToMany(mappedBy = "roles")
-	private HashSet<Usuario> usuarios = new HashSet<>();
+	private Set<Usuario> usuarios;
+
+	@Override
+	public String getAuthority() {
+		return this.nome.toString();
+	}
 
 }

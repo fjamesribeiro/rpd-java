@@ -1,13 +1,11 @@
 package br.com.james.services;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.james.dto.HumorDTO;
-import br.com.james.dto.SentimentoDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
 import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Humor;

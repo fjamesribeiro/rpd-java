@@ -17,7 +17,7 @@ import br.com.james.dto.PacienteDTO;
 import br.com.james.services.PacienteService;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/rest/pac")
 public class PacienteController {
 
 	@Autowired

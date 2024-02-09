@@ -17,7 +17,7 @@ import br.com.james.dto.HumorDTO;
 import br.com.james.services.HumorService;
 
 @RestController
-@RequestMapping("/humor")
+@RequestMapping("/rest/humor")
 public class HumorController {
 
 	@Autowired

@@ -1,7 +1,6 @@
 package br.com.james.controllers.rest;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,7 +17,7 @@ import br.com.james.dto.SentimentoDTO;
 import br.com.james.services.SentimentoService;
 
 @RestController
-@RequestMapping("/sentimento")
+@RequestMapping("/rest/sentimento")
 public class SentimentoController {
 
 	@Autowired

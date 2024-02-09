@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Paciente implements Serializable {
+public class Paciente extends Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 

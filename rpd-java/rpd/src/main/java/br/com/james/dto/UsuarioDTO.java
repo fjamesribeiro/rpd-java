@@ -1,10 +1,15 @@
 package br.com.james.dto;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -14,10 +19,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotBlank
@@ -29,7 +37,7 @@ public class UsuarioDTO implements Serializable {
 	@NotBlank
 	@Email
 	private String email;
-	
+
 	@NotBlank
 	@Email
 	private String senha;
@@ -39,8 +47,8 @@ public class UsuarioDTO implements Serializable {
 
 	@JsonIgnore
 	private PsicologoDTO psicologo;
-	
+
 	@JsonIgnore
-	private List<RoleDTO> roles;
+	private Set<RoleDTO> roles;
 
 }
