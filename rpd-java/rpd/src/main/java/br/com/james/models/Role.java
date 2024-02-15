@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,7 +31,7 @@ public class Role implements Serializable, GrantedAuthority {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, unique = true)
+	@Column(unique = true)
 	@Enumerated(EnumType.STRING)
 	private RoleName nome;
 
@@ -38,6 +40,11 @@ public class Role implements Serializable, GrantedAuthority {
 
 	@Override
 	public String getAuthority() {
+		return this.nome.toString();
+	}
+	
+	@Override
+	public String toString() {
 		return this.nome.toString();
 	}
 

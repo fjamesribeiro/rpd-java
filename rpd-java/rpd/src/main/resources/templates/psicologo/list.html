@@ -19,8 +19,8 @@
 			<tbody>
 				<tr th:each="psicologo: ${psicologos}">
 					<td th:text="${psicologo.id}" />
-					<td th:text="${psicologo.firstName}" />
-					<td th:text="${psicologo.lastName}" />
+					<td th:text="${psicologo.nome}" />
+					<td th:text="${psicologo.sobrenome}" />
 					<td th:text="${psicologo.email}" />
 					<td>
 						<a th:href="@{'/psc/edit/'+${psicologo.id}}">Editar</a>

@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
 
 <head th:replace="~{fragmentos :: head}" />
 
@@ -7,16 +8,16 @@
 	<header th:replace="~{fragmentos :: header}" />
 	<div class="container">
 		<form method="post" action="/pac" th:object="${paciente}">
-			<input type="hidden" th:field="*{id}" th:value="${paciente.id}" />
+			<input type="hidden" th:field="*{id}" />
 
 			<div class="mb-3">
 				<label for="firstName" class="form-label">Nome</label>
-				<input type="text" class="form-control" th:field="*{firstName}" />
+				<input type="text" class="form-control" th:field="*{nome}" />
 			</div>
 
 			<div class="mb-3">
 				<label for="lastName" class="form-label">Sobrenome</label>
-				<input type="text" class="form-control" th:field="*{lastName}" />
+				<input type="text" class="form-control" th:field="*{sobrenome}" />
 			</div>
 
 			<div class="mb-3">
@@ -24,18 +25,19 @@
 				<input type="email" class="form-control" th:field="*{email}" />
 			</div>
 
-			<div class="mb-3">
-				<label for="psicologos" class="form-label">Psicólogo</label>
+			<div class="mb-3" sec:authorize="hasAuthority('ADMIN')">
+				<label for=" psicologos" class="form-label">Psicólogo</label>
 
 				<select class="form-select" id="psicologos" th:field="*{psicologo.id}">
 					<th:block th:each="psc : ${listPsicologos}">
-						<option th:text="${psc.firstName} + ' ' + ${psc.lastName}" th:value="${psc.id}" />
+						<option th:text="${psc.nome} + ' ' + ${psc.sobrenome}" th:value="${psc.id}" />
 					</th:block>
 				</select>
-
 			</div>
+
 			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+	</div>
+	</form>
 	</div>
 </body>
 

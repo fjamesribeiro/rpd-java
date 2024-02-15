@@ -1,27 +1,34 @@
 package br.com.james.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.james.dto.PacienteDTO;
 import br.com.james.exceptions.ResourceNotFoundException;
 import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Paciente;
+import br.com.james.models.RoleName;
 import br.com.james.repositories.PacienteRepository;
-import br.com.james.repositories.PsicologoRepository;
+import br.com.james.repositories.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 public class PacienteService implements iCRUDService<PacienteDTO> {
 
-	@Autowired
-	private PsicologoRepository psicologoRepository;
 
 	@Autowired
 	private PacienteRepository pacienteRepository;
+
+	@Autowired
+	private RoleRepository roleRepository;
+
+	@Autowired
+	private PasswordEncoder encoder;
 
 	public List<PacienteDTO> findAll() {
 		log.info("Finding All Pacientes");
@@ -40,28 +47,26 @@ public class PacienteService implements iCRUDService<PacienteDTO> {
 
 	public PacienteDTO create(PacienteDTO dto) {
 		log.info("Creating One Paciente");
+
+		var role = roleRepository.findByNome(RoleName.PSC);
+
 		var ent = ObjectMapperUtils.map(dto, Paciente.class);
+		ent.setSenha(encoder.encode(dto.getSenha()));
+		ent.setRoles(Set.of(role));
 
-		var psc = psicologoRepository.findById(dto.getPsicologo().getId())
-				.orElseThrow(() -> new ResourceNotFoundException(
-						"No records found for this Psicolodo ID: " + dto.getPsicologo().getId()));
-
-		ent.setPsicologo(psc);
 		var ret = ObjectMapperUtils.map(pacienteRepository.save(ent), PacienteDTO.class);
+
 		return ret;
 	}
 
 	public PacienteDTO update(PacienteDTO dto) {
 		log.info("Updating One Paciente");
 
-		var ent = pacienteRepository.findById(dto.getId())
+		pacienteRepository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		var psc = psicologoRepository.findById(dto.getPsicologo().getId())
-				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getPsicologo().getId()));
-
-		ent.setPsicologo(psc);
-
+		var ent = ObjectMapperUtils.map(dto, Paciente.class);
+		
 		return ObjectMapperUtils.map(pacienteRepository.save(ent), PacienteDTO.class);
 	}
 
@@ -73,5 +78,4 @@ public class PacienteService implements iCRUDService<PacienteDTO> {
 
 		pacienteRepository.delete(ent);
 	}
-
 }

@@ -20,10 +20,10 @@
 			<tbody>
 				<tr th:each="paciente: ${pacientes}">
 					<td th:text="${paciente.id}" />
-					<td th:text="${paciente.firstName}" />
-					<td th:text="${paciente.lastName}" />
+					<td th:text="${paciente.nome}" />
+					<td th:text="${paciente.sobrenome}" />
 					<td th:text="${paciente.email}" />
-					<td th:text="${paciente.psicologo.firstName} + ' ' + ${paciente.psicologo.lastName}" />
+					<td th:text="${paciente.psicologo.nome} + ' ' + ${paciente.psicologo.sobrenome}" />
 					<td>
 						<a th:href="@{'/pac/edit/'+${paciente.id}}">Editar</a>
 						<a th:href="@{'/pac/del/'+${paciente.id}}">Excluir</a>

@@ -6,22 +6,19 @@
 <body>
 	<header th:replace="~{fragmentos :: header}" />
 	<div class="container">
-		<form method="post" action="/psc" th:object="${psicologo}">
+		<form method="post" action="/psc" th:object="${psicologo}">	
 			<input type="hidden" id="id" name="id" th:value="${psicologo.id}" />
 			<div class="mb-3">
-				<label for="firstName" class="form-label">Nome</label>
-				<input type="text" class="form-control" id="fisrtName" name="firstName"
-					th:value="${psicologo.firstName}" />
+				<label for="nome" class="form-label">Nome</label>
+				<input type="text" class="form-control" th:field="${psicologo.nome}" />
 			</div>
 			<div class="mb-3">
-				<label for="lastName" class="form-label">Sobrenome</label>
-				<input type="text" class="form-control" id="lastName" name="lastName"
-					th:value="${psicologo.lastName}" />
+				<label for="sobrenome" class="form-label">Sobrenome</label>
+				<input type="text" class="form-control" th:field="${psicologo.sobrenome}" />
 			</div>
 			<div class="mb-3">
-				<label for="exampleInputEmail1" class="form-label">Email</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-					name="email" th:value="${psicologo.email}" />
+				<label for="email" class="form-label">Email</label>
+				<input type="email" class="form-control" th:field="${psicologo.email}" />
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>

@@ -12,4 +12,5 @@ public class RpdApplication {
 		System.out.println(new BCryptPasswordEncoder().encode("senha123"));
 	}
 
+	
 }
