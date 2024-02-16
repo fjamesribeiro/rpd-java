@@ -2,6 +2,8 @@ package br.com.james.dto;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +15,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonBackReference
 	private PsicologoDTO psicologo;
 
 //	@JsonBackReference

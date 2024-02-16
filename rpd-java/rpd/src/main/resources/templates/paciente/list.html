@@ -6,31 +6,34 @@
 <body>
 	<header th:replace="~{fragmentos :: header}" />
 	<div class="container">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Sobrenome</th>
-					<th scope="col">Email</th>
-					<th scope="col">Psicólogo</th>
-					<th scope="col">#</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="paciente: ${pacientes}">
-					<td th:text="${paciente.id}" />
-					<td th:text="${paciente.nome}" />
-					<td th:text="${paciente.sobrenome}" />
-					<td th:text="${paciente.email}" />
-					<td th:text="${paciente.psicologo.nome} + ' ' + ${paciente.psicologo.sobrenome}" />
-					<td>
-						<a th:href="@{'/pac/edit/'+${paciente.id}}">Editar</a>
-						<a th:href="@{'/pac/del/'+${paciente.id}}">Excluir</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<!-- Adiciona uma classe row para definir uma linha do grid -->
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-7 col-lg-5">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Sobrenome</th>
+							<th scope="col">Email</th>
+							<th scope="col">Psicólogo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="paciente: ${pacientes}">
+							<td th:text="${paciente.id}" />
+							<td th:text="${paciente.nome}" />
+							<td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;"  th:text="${paciente.sobrenome}" />
+							<td th:text="${paciente.email}" />
+							<td>
+								<a th:href="@{'/pac/edit/'+${paciente.id}}">Editar</a>
+								<a th:href="@{'/pac/del/'+${paciente.id}}">Excluir</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 </body>
 

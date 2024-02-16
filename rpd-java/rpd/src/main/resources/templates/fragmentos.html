@@ -10,22 +10,28 @@
 </head>
 
 <header class="container" th:frament="header">
-	<div sec:authorize="isAuthenticated()">
+	<div class="container-fluid" sec:authorize="isAuthenticated()">
 		User: <div sec:authentication="name"></div>
 		Roles: <div sec:authentication="principal.authorities"></div>
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Logout" />
 		</form>
 	</div>
+	<div>
+		<p>Bem-vindo <label class="form-label" sec:authentication="name" /></p>
+		<p th:text="${#authentication.authorities}" /p>
+		<p>Suas autoridades são: </p>
+	</div>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
+			<div>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
@@ -39,7 +45,8 @@
 								Psicologo
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a th:href="@{/psc/create}" class="dropdown-item">Cadastrar</a></li>
+								<li><a th:href="@{/psc/create}"
+										class="dropdown-item">Cadastrar</a></li>
 								<li><a th:href="@{/psc/list}" class="dropdown-item">Listar</a></li>
 							</ul>
 						</li>
@@ -53,8 +60,10 @@
 								Paciente
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a th:href="@{/pac/create}" class="dropdown-item">Cadastrar</a></li>
-								<li><a th:href="@{/pac/list}" class="dropdown-item">Listar</a></li>
+								<li><a th:href="@{/pac/create}"
+										class="dropdown-item">Cadastrar</a></li>
+								<li><a th:href="@{/pac/list}" class="dropdown-item">Listar</a>
+								</li>
 							</ul>
 						</li>
 					</div>

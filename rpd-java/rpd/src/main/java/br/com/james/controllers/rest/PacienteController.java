@@ -36,7 +36,6 @@ public class PacienteController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public PacienteDTO create(@RequestBody() PacienteDTO dto) {
-		System.out.println("dffdsf");
 		return service.create(dto);
 	}
 	

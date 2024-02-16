@@ -48,10 +48,10 @@ public class PacienteService implements iCRUDService<PacienteDTO> {
 	public PacienteDTO create(PacienteDTO dto) {
 		log.info("Creating One Paciente");
 
-		var role = roleRepository.findByNome(RoleName.PSC);
 
 		var ent = ObjectMapperUtils.map(dto, Paciente.class);
 		ent.setSenha(encoder.encode(dto.getSenha()));
+		var role = roleRepository.findByNome(RoleName.PAC);
 		ent.setRoles(Set.of(role));
 
 		var ret = ObjectMapperUtils.map(pacienteRepository.save(ent), PacienteDTO.class);

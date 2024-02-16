@@ -25,7 +25,6 @@ public class UsuarioController {
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<UsuarioDTO> findAll() {
-		System.out.println("dffdsf");
 		return service.findAll();
 	}
 	
@@ -37,7 +36,6 @@ public class UsuarioController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public UsuarioDTO create(@RequestBody() UsuarioDTO dto) {
-		System.out.println("dffdsf");
 		return service.create(dto);
 	}
 	

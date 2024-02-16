@@ -2,24 +2,21 @@ package br.com.james.models;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "admin")
 @Getter
 @Setter
-@NoArgsConstructor
-public class Admin implements Serializable {
+@PrimaryKeyJoinColumn(name="id")
+@OnDelete(action = OnDeleteAction.CASCADE) 
+public class Admin extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
 }

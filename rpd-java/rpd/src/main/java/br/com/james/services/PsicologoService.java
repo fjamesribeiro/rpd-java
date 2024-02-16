@@ -64,11 +64,9 @@ public class PsicologoService implements iCRUDService<PsicologoDTO> {
 
 	public PsicologoDTO create(PsicologoDTO dto) {
 		log.info("Creating One Psicologo");
-
-		var role = roleRepository.findByNome(RoleName.PSC);
-
 		var ent = ObjectMapperUtils.map(dto, Psicologo.class);
 		ent.setSenha(encoder.encode(dto.getSenha()));
+		var role = roleRepository.findByNome(RoleName.PSC);
 		ent.setRoles(Set.of(role));
 		var ret = ObjectMapperUtils.map(repository.save(ent), PsicologoDTO.class);
 		return ret;

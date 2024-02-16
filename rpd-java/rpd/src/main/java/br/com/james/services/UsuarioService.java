@@ -19,14 +19,23 @@ public class UsuarioService implements iCRUDService<UsuarioDTO> {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
-
 
 	public List<UsuarioDTO> findAll() {
 		log.info("Finding All usuarios");
 		return ObjectMapperUtils.mapAll(usuarioRepository.findAll(), UsuarioDTO.class);
+	}
+
+	public UsuarioDTO findByEmail(String email) {
+		log.info("Finding One usuario");
+		var ret = usuarioRepository.findByEmail(email)
+				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + email));
+
+		var ret2 = ObjectMapperUtils.map(ret, UsuarioDTO.class);
+
+		return ret2;
 	}
 
 	public UsuarioDTO findById(Long id) {
@@ -41,19 +50,18 @@ public class UsuarioService implements iCRUDService<UsuarioDTO> {
 
 	public UsuarioDTO create(UsuarioDTO dto) {
 		log.info("Creating One usuario");
-		
+
 		var ent = ObjectMapperUtils.map(dto, Usuario.class);
-		
+
 		ent.setSenha(encoder.encode(dto.getSenha()));
 
 		var ret = ObjectMapperUtils.map(usuarioRepository.save(ent), UsuarioDTO.class);
-		
+
 		return ret;
 	}
 
 	public UsuarioDTO update(UsuarioDTO dto) {
 		log.info("Updating One usuario");
-		
 
 		var ent = usuarioRepository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
