@@ -14,6 +14,7 @@ import br.com.james.services.HumorService;
 import br.com.james.services.PacienteService;
 import br.com.james.services.RpdService;
 import br.com.james.services.SentimentoService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/rpd")
@@ -90,9 +91,9 @@ public class RpdControllerView {
 	}
 
 	@PostMapping()
-	public String post(RpdDTO dto) {
+	public String post(HttpSession session, RpdDTO dto) {
 		if (dto.getId() == null) {
-			service.create(dto);
+			service.create(session, dto);
 		} else {
 			service.update(dto);
 		}

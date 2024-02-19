@@ -1,13 +1,17 @@
 package br.com.james.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +26,12 @@ public class Paciente extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
-	@JoinColumn(name = "psicologo_id") // Chave estrangeira para Psicologo
+	@JoinColumn(name = "psicologo_id") 
 	private Psicologo psicologo;
+	
+	@JsonBackReference(value="1")
+	@OneToMany(mappedBy = "paciente")
+	private ArrayList<Rpd> rpds;
+
 
 }

@@ -1,4 +1,4 @@
-package br.com.james.exceptions.handler;
+package br.com.james.config.exceptions.handler;
 
 import java.net.http.HttpHeaders;
 import java.util.Date;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.james.exceptions.ExceptionResponse;
-import br.com.james.exceptions.ResourceNotFoundException;
+import br.com.james.config.exceptions.ExceptionResponse;
+import br.com.james.config.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 @RestController

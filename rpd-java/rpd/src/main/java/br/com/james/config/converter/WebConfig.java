@@ -1,4 +1,4 @@
-package br.com.james.utils.converter;
+package br.com.james.config.converter;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;

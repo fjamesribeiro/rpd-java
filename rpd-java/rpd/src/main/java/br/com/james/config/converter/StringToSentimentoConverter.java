@@ -1,4 +1,4 @@
-package br.com.james.utils.converter;
+package br.com.james.config.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

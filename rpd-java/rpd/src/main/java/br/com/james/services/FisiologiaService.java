@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.james.config.exceptions.ResourceNotFoundException;
+import br.com.james.config.mapper.ObjectMapperUtils;
 import br.com.james.dto.FisiologiaDTO;
-import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Fisiologia;
 import br.com.james.repositories.FisiologiaRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class FisiologiaService implements iCRUDService<FisiologiaDTO> {
+public class FisiologiaService{
 
 	@Autowired
 	private FisiologiaRepository fisiologiaRepository;

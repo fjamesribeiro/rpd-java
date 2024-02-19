@@ -1,4 +1,4 @@
-package br.com.james.mapper;
+package br.com.james.config.mapper;
 
 import java.util.Collection;
 import java.util.List;

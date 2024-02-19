@@ -7,7 +7,6 @@ import java.util.Set;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +44,7 @@ public class Rpd implements Serializable {
 	@Column(name = "comportamento")
 	private String comportamento;
 
-	@JsonBackReference
+	@JsonBackReference(value="1")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "paciente_id", nullable = false)
 	private Paciente paciente;
@@ -53,7 +52,7 @@ public class Rpd implements Serializable {
 	@Column(name = "pensamento")
 	private String pensamento;
 
-	@JsonManagedReference
+	@JsonBackReference(value="2")
 	@ManyToOne()
 	@JoinColumn(name = "humor_id")
 	private Humor humor;

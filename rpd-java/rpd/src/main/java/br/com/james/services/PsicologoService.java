@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.james.config.exceptions.ResourceNotFoundException;
+import br.com.james.config.mapper.ObjectMapperUtils;
 import br.com.james.dto.PsicologoDTO;
-import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Psicologo;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PsicologoRepository;
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class PsicologoService implements iCRUDService<PsicologoDTO> {
+public class PsicologoService{
 
 	@Autowired
 	private PsicologoRepository repository;

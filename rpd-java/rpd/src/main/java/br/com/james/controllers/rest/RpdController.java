@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.james.dto.RpdDTO;
 import br.com.james.services.RpdService;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/rest/rpd")
@@ -35,10 +36,10 @@ public class RpdController {
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO create(@RequestBody() RpdDTO dto) {
-		return service.create(dto);
+	public RpdDTO create(HttpSession session, @RequestBody() RpdDTO dto) {
+		return service.create(session, dto);
 	}
-	
+
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public RpdDTO update(@RequestBody() RpdDTO dto) {
 		return service.update(dto);

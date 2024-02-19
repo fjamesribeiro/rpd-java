@@ -1,6 +1,7 @@
 package br.com.james.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -18,7 +19,7 @@ public class PacienteDTO extends UsuarioDTO implements Serializable {
 	@JsonBackReference
 	private PsicologoDTO psicologo;
 
-//	@JsonBackReference
-//	private List<RpdDTO> rpds;
+	@JsonBackReference(value="1")
+	private ArrayList<RpdDTO> rpds;
 
 }

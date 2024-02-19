@@ -1,4 +1,4 @@
-package br.com.james.exceptions;
+package br.com.james.config.exceptions;
 
 import java.io.Serializable;
 import java.util.Date;

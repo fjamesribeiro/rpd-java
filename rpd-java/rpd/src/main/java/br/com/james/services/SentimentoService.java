@@ -6,9 +6,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.james.config.exceptions.ResourceNotFoundException;
+import br.com.james.config.mapper.ObjectMapperUtils;
 import br.com.james.dto.SentimentoDTO;
-import br.com.james.exceptions.ResourceNotFoundException;
-import br.com.james.mapper.ObjectMapperUtils;
 import br.com.james.models.Humor;
 import br.com.james.models.Sentimento;
 import br.com.james.repositories.HumorRepository;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class SentimentoService implements iCRUDService<SentimentoDTO> {
+public class SentimentoService{
 
 	@Autowired
 	private SentimentoRepository sentimentoRepository;
