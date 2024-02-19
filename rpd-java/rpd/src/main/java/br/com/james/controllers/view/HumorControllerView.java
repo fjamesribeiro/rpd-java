@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.james.dto.HumorDTO;
+import br.com.james.dtos.HumorDTO;
 import br.com.james.services.HumorService;
 
 @Controller

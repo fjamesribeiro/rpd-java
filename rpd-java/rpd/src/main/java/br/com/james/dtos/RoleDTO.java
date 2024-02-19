@@ -1,4 +1,4 @@
-package br.com.james.dto;
+package br.com.james.dtos;
 
 import java.io.Serializable;
 import java.util.List;

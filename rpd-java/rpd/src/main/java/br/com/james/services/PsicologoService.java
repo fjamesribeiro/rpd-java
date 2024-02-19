@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.ObjectMapperUtils;
-import br.com.james.dto.PsicologoDTO;
+import br.com.james.dtos.PsicologoDTO;
 import br.com.james.models.Psicologo;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PsicologoRepository;

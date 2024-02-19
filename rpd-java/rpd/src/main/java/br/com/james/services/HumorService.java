@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.ObjectMapperUtils;
-import br.com.james.dto.HumorDTO;
+import br.com.james.dtos.HumorDTO;
 import br.com.james.models.Humor;
 import br.com.james.repositories.HumorRepository;
 import lombok.extern.slf4j.Slf4j;

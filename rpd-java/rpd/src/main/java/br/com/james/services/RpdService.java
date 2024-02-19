@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.ObjectMapperUtils;
-import br.com.james.dto.RpdDTO;
+import br.com.james.dtos.RpdDTO;
 import br.com.james.models.Fisiologia;
 import br.com.james.models.Rpd;
 import br.com.james.models.Sentimento;

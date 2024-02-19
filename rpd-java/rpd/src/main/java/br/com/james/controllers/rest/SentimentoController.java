@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dto.SentimentoDTO;
+import br.com.james.dtos.SentimentoDTO;
 import br.com.james.services.SentimentoService;
 
 @RestController

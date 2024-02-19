@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dto.PsicologoDTO;
+import br.com.james.dtos.PsicologoDTO;
 import br.com.james.services.PsicologoService;
 import jakarta.validation.Valid;
 

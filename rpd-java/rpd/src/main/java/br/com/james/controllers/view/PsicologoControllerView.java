@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.james.dto.PsicologoDTO;
+import br.com.james.dtos.PsicologoDTO;
 import br.com.james.services.PsicologoService;
 
 @Controller
