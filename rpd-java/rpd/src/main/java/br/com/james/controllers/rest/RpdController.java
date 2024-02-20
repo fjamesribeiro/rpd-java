@@ -36,7 +36,7 @@ public class RpdController {
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO create(HttpSession session, @RequestBody() RpdDTO dto) {
+	public RpdDTO create(HttpSession session, @RequestBody() RpdDTO dto) throws Exception {
 		return service.create(session, dto);
 	}
 

@@ -45,7 +45,7 @@ public class Rpd implements Serializable {
 	@Column(name = "comportamento")
 	private String comportamento;
 
-	@JsonBackReference(value="1")
+	@JsonBackReference(value = "1")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "paciente_id", nullable = false)
 	private Paciente paciente;
@@ -53,7 +53,7 @@ public class Rpd implements Serializable {
 	@Column(name = "pensamento")
 	private String pensamento;
 
-	@JsonBackReference(value="2")
+	@JsonBackReference(value = "2")
 	@ManyToOne()
 	@JoinColumn(name = "humor_id")
 	private Humor humor;
