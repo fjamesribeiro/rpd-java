@@ -1,7 +1,7 @@
 package br.com.james.dtos;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,5 +21,5 @@ public class RoleDTO implements Serializable {
 	private String nome;
 
 	@JsonIgnore
-	private List<UsuarioDTO> usuarios;
+	private Set<UsuarioDTO> usuarios;
 }

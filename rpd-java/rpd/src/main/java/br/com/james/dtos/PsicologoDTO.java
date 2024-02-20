@@ -1,7 +1,7 @@
 package br.com.james.dtos;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -17,6 +17,6 @@ public class PsicologoDTO extends UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@JsonManagedReference
-	private List<PacienteDTO> pacientes;
+	private Set<PacienteDTO> pacientes;
 
 }

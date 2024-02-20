@@ -1,12 +1,12 @@
 package br.com.james.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -29,9 +29,9 @@ public class Paciente extends Usuario implements Serializable {
 	@JoinColumn(name = "psicologo_id") 
 	private Psicologo psicologo;
 	
-	@JsonBackReference(value="1")
+	@JsonManagedReference(value="1")
 	@OneToMany(mappedBy = "paciente")
-	private ArrayList<Rpd> rpds;
+	private Set<Rpd> rpds;
 
 
 }
