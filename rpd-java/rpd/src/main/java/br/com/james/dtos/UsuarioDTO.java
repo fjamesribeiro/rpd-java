@@ -3,6 +3,10 @@ package br.com.james.dtos;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,6 +35,7 @@ public class UsuarioDTO implements Serializable {
 
 	private String senha = "senha123";
 
+	@JsonManagedReference
 	private Set<RoleDTO> roles;
 
 }

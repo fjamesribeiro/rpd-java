@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
-@Transactional
 public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Autowired
@@ -23,6 +22,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	UsuarioRepository repository;
 
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Usuario usuario = repository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario não encontrado: " + email));

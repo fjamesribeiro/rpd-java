@@ -29,7 +29,6 @@ public class Paciente extends Usuario implements Serializable {
 	@JoinColumn(name = "psicologo_id") 
 	private Psicologo psicologo;
 	
-	@JsonManagedReference(value="1")
 	@OneToMany(mappedBy = "paciente")
 	private Set<Rpd> rpds;
 

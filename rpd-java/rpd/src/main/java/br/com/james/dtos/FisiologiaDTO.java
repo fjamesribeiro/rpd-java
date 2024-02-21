@@ -3,6 +3,8 @@ package br.com.james.dtos;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,12 +20,12 @@ public class FisiologiaDTO implements Serializable {
 
 	private String texto;
 
+    @JsonBackReference(value = "fisiologia-rpds")
 	private Set<RpdDTO> rpds;
-	
+
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return this.getId().toString();
 	}
-	
+
 }

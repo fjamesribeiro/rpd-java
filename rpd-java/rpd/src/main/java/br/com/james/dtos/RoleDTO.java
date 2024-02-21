@@ -3,7 +3,7 @@ package br.com.james.dtos;
 import java.io.Serializable;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +18,8 @@ public class RoleDTO implements Serializable {
 
 	private Long id;
 
-	private String nome;
+	private RoleNameDTO nome;
 
-	@JsonIgnore
+	@JsonBackReference
 	private Set<UsuarioDTO> usuarios;
 }

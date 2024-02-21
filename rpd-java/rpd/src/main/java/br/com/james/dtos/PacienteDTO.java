@@ -16,10 +16,10 @@ public class PacienteDTO extends UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonBackReference
+	@JsonBackReference("paciente-psicologo")
 	private PsicologoDTO psicologo;
 
-	@JsonBackReference(value="1")
+	@JsonBackReference("paciente-rpds")
 	private Set<RpdDTO> rpds;
 
 }
