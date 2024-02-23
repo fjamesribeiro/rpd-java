@@ -6,12 +6,9 @@ import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,24 +42,21 @@ public class Rpd implements Serializable {
 	@Column(name = "comportamento")
 	private String comportamento;
 
-	@JsonBackReference(value = "1")
-	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "paciente_id", nullable = false)
 	private Paciente paciente;
 
 	@Column(name = "pensamento")
 	private String pensamento;
 
-	@JsonBackReference(value = "2")
 	@ManyToOne()
 	@JoinColumn(name = "humor_id")
 	private Humor humor;
 
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "rpd_fisiologia", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "fisiologia_id"))
 	private Set<Fisiologia> fisiologias;
 
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "rpd_sentimento", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "sentimento_id"))
 	private Set<Sentimento> sentimentos;
 }

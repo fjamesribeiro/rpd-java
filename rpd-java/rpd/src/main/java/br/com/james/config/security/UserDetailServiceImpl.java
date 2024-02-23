@@ -29,8 +29,10 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 		session.setAttribute("idUsuario", usuario.getId());
 
-		return new User(usuario.getEmail(), usuario.getSenha(), true, true, true, true, usuario.getRoles());
-
+		return User.builder()
+				.username(usuario.getEmail())
+				.password(usuario.getSenha())
+				.authorities(usuario.getRoles()).build();
 	}
 
 }

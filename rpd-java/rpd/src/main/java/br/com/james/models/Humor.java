@@ -32,7 +32,6 @@ public class Humor implements Serializable {
 	@Column(name = "texto", nullable = false)
 	private String texto;
 
-	@JsonManagedReference(value="2")
 	@OneToMany(mappedBy = "humor")
 	private Set<Rpd> rpds;
 
