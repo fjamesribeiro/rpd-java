@@ -3,8 +3,6 @@ package br.com.james.models;
 import java.io.Serializable;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,7 +30,6 @@ public class Humor implements Serializable {
 	@Column(name = "texto", nullable = false)
 	private String texto;
 
-	@JsonManagedReference(value="2")
 	@OneToMany(mappedBy = "humor")
 	private Set<Rpd> rpds;
 
