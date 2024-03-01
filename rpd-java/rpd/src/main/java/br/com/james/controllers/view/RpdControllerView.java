@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.james.dtos.RpdCreateDTO;
 import br.com.james.dtos.RpdDTO;
 import br.com.james.repositories.FisiologiaRepository;
 import br.com.james.repositories.HumorRepository;
@@ -93,7 +94,7 @@ public class RpdControllerView {
 	}
 
 	@PostMapping()
-	public String post(HttpSession session, RpdDTO dto) throws Exception{
+	public String post(HttpSession session, RpdCreateDTO dto) throws Exception{
 		if (dto.getId() == null) {
 			service.create(session, dto);
 		} else {

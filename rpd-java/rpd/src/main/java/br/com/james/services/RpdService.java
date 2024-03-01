@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.ObjectMapperUtils;
+import br.com.james.dtos.RpdCreateDTO;
+import br.com.james.dtos.RpdDTO;
 import br.com.james.dtos.RpdDTO;
 import br.com.james.models.Fisiologia;
 import br.com.james.models.Rpd;
@@ -45,7 +47,7 @@ public class RpdService {
 		log.info("Finding All Rpds");
 
 		var ret = repository.findAll();
-
+		
 		var ret2 = ObjectMapperUtils.mapAll(ret, RpdDTO.class);
 
 		return ret2;
@@ -61,7 +63,7 @@ public class RpdService {
 		return ret2;
 	}
 
-	public RpdDTO create(HttpSession session, RpdDTO dto) throws Exception {
+	public RpdDTO create(HttpSession session, RpdCreateDTO dto) throws Exception {
 		log.info("Creating One Rpd");
 
 		var rpd = ObjectMapperUtils.map(dto, Rpd.class);
@@ -91,7 +93,7 @@ public class RpdService {
 
 	}
 
-	public RpdDTO update(RpdDTO dto) {
+	public RpdDTO update(RpdCreateDTO dto) {
 		log.info("Updating One Rpd");
 
 		var ent = repository.findById(dto.getId())

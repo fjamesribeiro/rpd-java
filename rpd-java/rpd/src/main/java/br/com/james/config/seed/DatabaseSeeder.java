@@ -10,12 +10,16 @@ import org.springframework.stereotype.Component;
 import br.com.james.models.Admin;
 import br.com.james.models.Fisiologia;
 import br.com.james.models.Humor;
+import br.com.james.models.Paciente;
+import br.com.james.models.Psicologo;
 import br.com.james.models.Role;
 import br.com.james.models.RoleName;
 import br.com.james.models.Sentimento;
 import br.com.james.repositories.AdminRepository;
 import br.com.james.repositories.FisiologiaRepository;
 import br.com.james.repositories.HumorRepository;
+import br.com.james.repositories.PacienteRepository;
+import br.com.james.repositories.PsicologoRepository;
 import br.com.james.repositories.RoleRepository;
 import br.com.james.repositories.SentimentoRepository;
 import jakarta.transaction.Transactional;
@@ -37,6 +41,12 @@ public class DatabaseSeeder {
 
 	@Autowired
 	public AdminRepository adminRepository;
+
+	@Autowired
+	public PsicologoRepository psicologoRepository;
+
+	@Autowired
+	public PacienteRepository pacienteRepository;
 
 	@EventListener
 	public void seed(ContextRefreshedEvent event) {
@@ -67,6 +77,23 @@ public class DatabaseSeeder {
 				admin.setSenha("$2a$10$IGbm.HwIZ4a9BeYmwXrNleN/jzKVvoPSs0UeJka.7S6sC0FdqFIRy");
 				admin.setRoles(Set.of(roleAdm));
 				adminRepository.save(admin);
+
+				Psicologo psicologo = new Psicologo();
+				psicologo.setEmail("jamesribeiro2@gmail.com");
+				psicologo.setNome("James2");
+				psicologo.setSobrenome("Ribeiro2");
+				psicologo.setSenha("$2a$10$IGbm.HwIZ4a9BeYmwXrNleN/jzKVvoPSs0UeJka.7S6sC0FdqFIRy");
+				psicologo.setRoles(Set.of(rolePsc));
+				psicologoRepository.save(psicologo);
+
+				Paciente paciente = new Paciente();
+				paciente.setEmail("jamesribeiro3@gmail.com");
+				paciente.setNome("James3");
+				paciente.setSobrenome("Ribeiro3");
+				paciente.setSenha("$2a$10$IGbm.HwIZ4a9BeYmwXrNleN/jzKVvoPSs0UeJka.7S6sC0FdqFIRy");
+				paciente.setPsicologo(psicologo);
+				paciente.setRoles(Set.of(rolePac));
+				pacienteRepository.save(paciente);
 			}
 
 		}

@@ -6,6 +6,9 @@ import java.util.Set;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -25,9 +28,11 @@ public class Paciente extends Usuario implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "psicologo_id") 
+	@JsonBackReference
 	private Psicologo psicologo;
 	
 	@OneToMany(mappedBy = "paciente")
+	@JsonBackReference
 	private Set<Rpd> rpds;
 
 

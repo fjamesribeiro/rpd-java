@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class FisiologiaDTO implements Serializable {
 
 	private String texto;
 
-    @JsonBackReference(value = "fisiologia-rpds")
+	@JsonIgnore
 	private Set<RpdDTO> rpds;
 
 	@Override

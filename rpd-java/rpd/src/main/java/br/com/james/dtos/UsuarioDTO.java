@@ -33,7 +33,7 @@ public class UsuarioDTO implements Serializable {
 	
 	private String senha = "senha123";
 
-	@JsonManagedReference
+	
 	private Set<RoleDTO> roles;
 
 }

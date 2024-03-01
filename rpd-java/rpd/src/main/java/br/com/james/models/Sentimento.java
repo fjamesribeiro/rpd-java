@@ -3,6 +3,8 @@ package br.com.james.models;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,10 +34,12 @@ public class Sentimento implements Serializable {
 	private String texto;
 
 	@ManyToMany(mappedBy = "sentimentos")
+	@JsonBackReference(value = "sent-rpds")
 	private Set<Rpd> rpds;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "humor_sentimento", joinColumns = @JoinColumn(name = "sentimento_id"), inverseJoinColumns = @JoinColumn(name = "humor_id"))
+	@JsonBackReference(value = "sent-humores")
 	private Set<Humor> humores;
 
 }

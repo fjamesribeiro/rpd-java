@@ -7,8 +7,6 @@ import java.util.Set;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.james.config.converter.StringToFisiologiaConverter;
 import br.com.james.config.converter.StringToSentimentoConverter;
@@ -20,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RpdDTO implements Serializable {
+public class RpdCreateDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,16 +31,19 @@ public class RpdDTO implements Serializable {
 
 	private String comportamento;
 	
+	@JsonBackReference(value = "1")
 	private PacienteDTO paciente;
 
 	private String pensamento;
 
+	@JsonBackReference(value = "2")
 	private HumorDTO humor;
-	
+
+	@JsonBackReference(value = "3")
 	@Convert(converter = StringToFisiologiaConverter.class)
 	private Set<FisiologiaDTO> fisiologias;
 
-	
+	@JsonBackReference(value = "4")
 	@Convert(converter = StringToSentimentoConverter.class)
 	private Set<SentimentoDTO> sentimentos;
 

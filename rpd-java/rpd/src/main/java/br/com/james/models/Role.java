@@ -5,6 +5,9 @@ import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -34,6 +37,7 @@ public class Role implements Serializable, GrantedAuthority {
 	private RoleName nome;
 
 	@ManyToMany(mappedBy = "roles")
+	@JsonManagedReference
 	private Set<Usuario> usuarios;
 
 	@Override

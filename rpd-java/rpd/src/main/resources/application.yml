@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rpd?useTimezone=true&serverTimezone=UTC
     username: root
-    password: admin
+    password: admin   
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,3 +18,5 @@ spring:
           google:   
             client-id: 787222402243-dneos0ihbl71dgvd2fujslf5sobfdb3n.apps.googleusercontent.com
             client-secret: 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
+server:
+  port: 8081 

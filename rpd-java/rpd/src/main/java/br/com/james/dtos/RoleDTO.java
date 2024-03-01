@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,6 @@ public class RoleDTO implements Serializable {
 
 	private RoleNameDTO nome;
 
-	@JsonBackReference
+	@JsonIgnore
 	private Set<UsuarioDTO> usuarios;
 }
