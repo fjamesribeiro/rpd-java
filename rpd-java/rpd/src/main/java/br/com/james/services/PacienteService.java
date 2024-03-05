@@ -8,9 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
-import br.com.james.config.mapper.ObjectMapperUtils;
+import br.com.james.config.mapper.PacienteMapper;
 import br.com.james.dtos.PacienteDTO;
-import br.com.james.models.Paciente;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PacienteRepository;
 import br.com.james.repositories.RoleRepository;
@@ -18,8 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class PacienteService{
-
+public class PacienteService {
 
 	@Autowired
 	private PacienteRepository pacienteRepository;
@@ -30,9 +28,13 @@ public class PacienteService{
 	@Autowired
 	private PasswordEncoder encoder;
 
+	@Autowired
+	private PacienteMapper pacienteMapper;
+
 	public List<PacienteDTO> findAll() {
 		log.info("Finding All Pacientes");
-		return ObjectMapperUtils.mapAll(pacienteRepository.findAll(), PacienteDTO.class);
+		var ret = pacienteRepository.findAll();
+		return pacienteMapper.toPacientesDto(ret);
 	}
 
 	public PacienteDTO findById(Long id) {
@@ -40,7 +42,7 @@ public class PacienteService{
 		var ret = pacienteRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = ObjectMapperUtils.map(ret, PacienteDTO.class);
+		var ret2 = pacienteMapper.toPacienteDto(ret);
 
 		return ret2;
 	}
@@ -48,13 +50,12 @@ public class PacienteService{
 	public PacienteDTO create(PacienteDTO dto) {
 		log.info("Creating One Paciente");
 
-
-		var ent = ObjectMapperUtils.map(dto, Paciente.class);
+		var ent = pacienteMapper.toPaciente(dto);
 		ent.setSenha(encoder.encode(dto.getSenha()));
 		var role = roleRepository.findByNome(RoleName.PAC);
 		ent.setRoles(Set.of(role));
 
-		var ret = ObjectMapperUtils.map(pacienteRepository.save(ent), PacienteDTO.class);
+		var ret = pacienteMapper.toPacienteDto(pacienteRepository.save(ent));
 
 		return ret;
 	}
@@ -65,9 +66,9 @@ public class PacienteService{
 		pacienteRepository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		var ent = ObjectMapperUtils.map(dto, Paciente.class);
-		
-		return ObjectMapperUtils.map(pacienteRepository.save(ent), PacienteDTO.class);
+		var ent = pacienteMapper.toPaciente(dto);
+
+		return pacienteMapper.toPacienteDto(pacienteRepository.save(ent));
 	}
 
 	public void delete(Long id) {
