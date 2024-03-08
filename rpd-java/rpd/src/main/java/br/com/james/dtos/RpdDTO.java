@@ -6,8 +6,6 @@ import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.james.config.converter.StringToFisiologiaConverter;
@@ -32,17 +30,16 @@ public class RpdDTO implements Serializable {
 	private String situacao;
 
 	private String comportamento;
-	
+
 	private PacienteDTO paciente;
 
 	private String pensamento;
 
 	private HumorDTO humor;
-	
+
 	@Convert(converter = StringToFisiologiaConverter.class)
 	private Set<FisiologiaDTO> fisiologias;
 
-	
 	@Convert(converter = StringToSentimentoConverter.class)
 	private Set<SentimentoDTO> sentimentos;
 

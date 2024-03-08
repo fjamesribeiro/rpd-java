@@ -46,7 +46,7 @@ public class Rpd implements Serializable {
 
 	@ManyToOne()
 	@JoinColumn(name = "paciente_id", nullable = false)
-	@JsonManagedReference
+	
 	private Paciente paciente;
 
 	@Column(name = "pensamento")
@@ -54,16 +54,15 @@ public class Rpd implements Serializable {
 
 	@ManyToOne()
 	@JoinColumn(name = "humor_id")
-	@JsonManagedReference
+	
 	private Humor humor;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "rpd_fisiologia", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "fisiologia_id"))
-	@JsonManagedReference
 	private Set<Fisiologia> fisiologias;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)
-	@JoinTable(name = "rpd_sentimento", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "sentimento_id"))
 	@JsonManagedReference
+	@JoinTable(name = "rpd_sentimento", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "sentimento_id"))	
 	private Set<Sentimento> sentimentos;
 }

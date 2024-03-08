@@ -34,7 +34,7 @@ public class PacienteService {
 	public List<PacienteDTO> findAll() {
 		log.info("Finding All Pacientes");
 		var ret = pacienteRepository.findAll();
-		return pacienteMapper.toPacientesDto(ret);
+		return pacienteMapper.toDto(ret);
 	}
 
 	public PacienteDTO findById(Long id) {
@@ -42,7 +42,7 @@ public class PacienteService {
 		var ret = pacienteRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = pacienteMapper.toPacienteDto(ret);
+		var ret2 = pacienteMapper.toDto(ret);
 
 		return ret2;
 	}
@@ -50,12 +50,12 @@ public class PacienteService {
 	public PacienteDTO create(PacienteDTO dto) {
 		log.info("Creating One Paciente");
 
-		var ent = pacienteMapper.toPaciente(dto);
+		var ent = pacienteMapper.toEntity(dto);
 		ent.setSenha(encoder.encode(dto.getSenha()));
 		var role = roleRepository.findByNome(RoleName.PAC);
 		ent.setRoles(Set.of(role));
 
-		var ret = pacienteMapper.toPacienteDto(pacienteRepository.save(ent));
+		var ret = pacienteMapper.toDto(pacienteRepository.save(ent));
 
 		return ret;
 	}
@@ -66,9 +66,9 @@ public class PacienteService {
 		pacienteRepository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		var ent = pacienteMapper.toPaciente(dto);
+		var ent = pacienteMapper.toEntity(dto);
 
-		return pacienteMapper.toPacienteDto(pacienteRepository.save(ent));
+		return pacienteMapper.toDto(pacienteRepository.save(ent));
 	}
 
 	public void delete(Long id) {

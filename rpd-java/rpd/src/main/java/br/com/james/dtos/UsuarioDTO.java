@@ -31,6 +31,6 @@ public class UsuarioDTO implements Serializable {
 	
 	private String senha = "senha123";
 	
-	private Set<RoleDTO> roles;
+//	private Set<RoleDTO> roles;
 
 }

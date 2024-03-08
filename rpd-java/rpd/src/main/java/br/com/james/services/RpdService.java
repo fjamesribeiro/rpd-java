@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
-import br.com.james.config.mapper.ObjectMapperUtils;
-import br.com.james.dtos.RpdCreateDTO;
+import br.com.james.config.mapper.FisiologiaMapper;
+import br.com.james.config.mapper.RpdMapper;
 import br.com.james.dtos.RpdDTO;
-import br.com.james.dtos.RpdDTO;
-import br.com.james.models.Fisiologia;
-import br.com.james.models.Rpd;
 import br.com.james.repositories.FisiologiaRepository;
 import br.com.james.repositories.HumorRepository;
 import br.com.james.repositories.PacienteRepository;
@@ -41,14 +38,20 @@ public class RpdService {
 	private SentimentoRepository sentimentoRepository;
 
 	@Autowired
-	private FisiologiaRepository fisiologiaRepository;
+	private FisiologiaRepository fisiologiaRepository;	
+	
+	@Autowired
+	private RpdMapper rpdMapper;
+	
+	@Autowired
+	private FisiologiaMapper fisiologiaMapper;
 
 	public List<RpdDTO> findAll() {
 		log.info("Finding All Rpds");
 
 		var ret = repository.findAll();
 		
-		var ret2 = ObjectMapperUtils.mapAll(ret, RpdDTO.class);
+		var ret2 = rpdMapper.toDto(ret);
 
 		return ret2;
 	}
@@ -58,15 +61,15 @@ public class RpdService {
 		var ret = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = ObjectMapperUtils.map(ret, RpdDTO.class);
+		var ret2 = rpdMapper.toDto(ret);
 
 		return ret2;
 	}
 
-	public RpdDTO create(HttpSession session, RpdCreateDTO dto) throws Exception {
+	public RpdDTO create(HttpSession session, RpdDTO dto) throws Exception {
 		log.info("Creating One Rpd");
 
-		var rpd = ObjectMapperUtils.map(dto, Rpd.class);
+		var rpd = rpdMapper.toEntity(dto);
 
 		var pac = pacienteRepository.findById((Long) session.getAttribute("idUsuario"))
 				.orElseThrow(() -> new UserPrincipalNotFoundException("User not found"));
@@ -89,11 +92,11 @@ public class RpdService {
 
 		var ret = repository.save(rpd);
 
-		return ObjectMapperUtils.map(ret, RpdDTO.class);
+		return rpdMapper.toDto(ret);
 
 	}
 
-	public RpdDTO update(RpdCreateDTO dto) {
+	public RpdDTO update(RpdDTO dto) {
 		log.info("Updating One Rpd");
 
 		var ent = repository.findById(dto.getId())
@@ -102,12 +105,12 @@ public class RpdService {
 		ent.setData(dto.getData());
 		ent.setComportamento(dto.getComportamento());
 //		ent.setHumor(dto.getHumor());
-//		ent.setSentimentos(ObjectMapperUtils.mapAllSet(dto.getSentimentos(), Sentimento.class));
-		ent.setFisiologias(ObjectMapperUtils.mapAllSet(dto.getFisiologias(), Fisiologia.class));
+//		ent.setSentimentos(rpdMapper.mapAllSet(dto.getSentimentos(), Sentimento.class));
+//		ent.setFisiologias(fisiologiaMapper.toEntity(dto.getFisiologias()));
 		ent.setSituacao(dto.getSituacao());
 		ent.setPensamento(dto.getPensamento());
 
-		return ObjectMapperUtils.map(repository.save(ent), RpdDTO.class);
+		return rpdMapper.toDto(repository.save(ent));
 	}
 
 	public void delete(Long id) {

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +20,10 @@ public class SentimentoDTO implements Serializable {
 	private Long id;
 
 	private String texto;
+	
+//	private Set<RpdDTO> rpds;
 
-	@JsonIgnore
-	private Set<RpdDTO> rpds;
-
-	@JsonBackReference
-	private Set<HumorDTO> humores;
+//	private List<HumorDTO> humores;
 
 	@Override
 	public String toString() {

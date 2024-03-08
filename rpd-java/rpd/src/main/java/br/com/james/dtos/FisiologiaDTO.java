@@ -1,9 +1,6 @@
 package br.com.james.dtos;
 
 import java.io.Serializable;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +17,7 @@ public class FisiologiaDTO implements Serializable {
 
 	private String texto;
 
-	@JsonIgnore
-	private Set<RpdDTO> rpds;
+//	private Set<RpdDTO> rpds;
 
 	@Override
 	public String toString() {

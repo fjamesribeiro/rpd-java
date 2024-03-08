@@ -25,7 +25,6 @@ public class Psicologo extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@OneToMany(mappedBy = "psicologo")
-	@JsonManagedReference
 	private Set<Paciente> pacientes;
 
 	

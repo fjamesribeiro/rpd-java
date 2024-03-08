@@ -34,12 +34,11 @@ public class Sentimento implements Serializable {
 	private String texto;
 
 	@ManyToMany(mappedBy = "sentimentos")
-	@JsonBackReference(value = "sent-rpds")
+	@JsonBackReference
 	private Set<Rpd> rpds;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "humor_sentimento", joinColumns = @JoinColumn(name = "sentimento_id"), inverseJoinColumns = @JoinColumn(name = "humor_id"))
-	@JsonBackReference(value = "sent-humores")
 	private Set<Humor> humores;
 
 }

@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dtos.RpdCreateDTO;
-import br.com.james.dtos.RpdDTO;
 import br.com.james.dtos.RpdDTO;
 import br.com.james.services.RpdService;
 import jakarta.servlet.http.HttpSession;
@@ -38,12 +36,12 @@ public class RpdController {
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO create(HttpSession session, @RequestBody() RpdCreateDTO dto) throws Exception {
+	public RpdDTO create(HttpSession session, @RequestBody() RpdDTO dto) throws Exception {
 		return service.create(session, dto);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO update(@RequestBody() RpdCreateDTO dto) {
+	public RpdDTO update(@RequestBody() RpdDTO dto) {
 		return service.update(dto);
 	}
 

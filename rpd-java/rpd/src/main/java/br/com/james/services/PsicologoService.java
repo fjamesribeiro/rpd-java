@@ -8,9 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
-import br.com.james.config.mapper.ObjectMapperUtils;
+import br.com.james.config.mapper.PsicologoMapper;
 import br.com.james.dtos.PsicologoDTO;
-import br.com.james.models.Psicologo;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PsicologoRepository;
 import br.com.james.repositories.RoleRepository;
@@ -18,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class PsicologoService{
+public class PsicologoService {
 
 	@Autowired
 	private PsicologoRepository repository;
@@ -29,13 +28,15 @@ public class PsicologoService{
 	@Autowired
 	private PasswordEncoder encoder;
 
+	@Autowired
+	private PsicologoMapper psicologoMapper;
+
 	public List<PsicologoDTO> findAll() {
 		log.info("Finding All Psicologos");
 
 		var ret = repository.findAll();
 
-//		var ret2 = ObjectMapperUtils.mapAll(ret, PsicologoDTO.class);
-		var ret2 = ObjectMapperUtils.mapAll(ret, PsicologoDTO.class);
+		var ret2 = psicologoMapper.toDto(ret);
 
 		return ret2;
 	}
@@ -46,7 +47,7 @@ public class PsicologoService{
 		var ret = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = ObjectMapperUtils.map(ret, PsicologoDTO.class);
+		var ret2 = psicologoMapper.toDto(ret);
 
 		return ret2;
 	}
@@ -57,18 +58,18 @@ public class PsicologoService{
 		var ret = repository.findByEmail(email)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this email: " + email));
 
-		var ret2 = ObjectMapperUtils.map(ret, PsicologoDTO.class);
+		var ret2 = psicologoMapper.toDto(ret);
 
 		return ret2;
 	}
 
 	public PsicologoDTO create(PsicologoDTO dto) {
 		log.info("Creating One Psicologo");
-		var ent = ObjectMapperUtils.map(dto, Psicologo.class);
+		var ent = psicologoMapper.toEntity(dto);
 		ent.setSenha(encoder.encode(dto.getSenha()));
 		var role = roleRepository.findByNome(RoleName.PSC);
 		ent.setRoles(Set.of(role));
-		var ret = ObjectMapperUtils.map(repository.save(ent), PsicologoDTO.class);
+		var ret = psicologoMapper.toDto(repository.save(ent));
 		return ret;
 	}
 
@@ -78,9 +79,9 @@ public class PsicologoService{
 		repository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		var ent = ObjectMapperUtils.map(dto, Psicologo.class);
+		var ent = psicologoMapper.toEntity(dto);
 
-		return ObjectMapperUtils.map(repository.save(ent), PsicologoDTO.class);
+		return psicologoMapper.toDto(repository.save(ent));
 	}
 
 	public void delete(Long id) {

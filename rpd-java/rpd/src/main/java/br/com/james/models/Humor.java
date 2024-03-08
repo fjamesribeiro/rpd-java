@@ -34,11 +34,9 @@ public class Humor implements Serializable {
 	private String texto;
 
 	@OneToMany(mappedBy = "humor")
-	@JsonBackReference
 	private Set<Rpd> rpds;
 
 	@ManyToMany(mappedBy = "humores", fetch = FetchType.EAGER)
-	@JsonManagedReference
 	private Set<Sentimento> sentimentos;
 
 }
