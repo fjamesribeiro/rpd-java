@@ -11,7 +11,6 @@ import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.PsicologoMapper;
 import br.com.james.dtos.psicologo.PsicologoGetDTO;
 import br.com.james.dtos.psicologo.PsicologoPostDTO;
-import br.com.james.dtos.psicologo.PsicologoSlimDTO;
 import br.com.james.models.Psicologo;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PsicologoRepository;
@@ -82,9 +81,9 @@ public class PsicologoService {
 		repository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		Psicologo psicologo =  new Psicologo();
-		
-		psicologoMapper.update(psicologo, dto);
+		Psicologo psicologo = new Psicologo();
+
+		psicologoMapper.updateEntity(dto, psicologo);
 
 		return psicologoMapper.toDto(repository.save(psicologo));
 	}
