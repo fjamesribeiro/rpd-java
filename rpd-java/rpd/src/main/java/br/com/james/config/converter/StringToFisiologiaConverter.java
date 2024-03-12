@@ -3,7 +3,7 @@ package br.com.james.config.converter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import br.com.james.dtos.FisiologiaDTO;
+import br.com.james.dtos.fisiologia.FisiologiaDTO;
 
 @Component
 public class StringToFisiologiaConverter implements Converter<String, FisiologiaDTO> {

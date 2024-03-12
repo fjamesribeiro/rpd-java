@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dtos.PsicologoDTO;
+import br.com.james.dtos.psicologo.PsicologoGetDTO;
+import br.com.james.dtos.psicologo.PsicologoPostDTO;
 import br.com.james.services.PsicologoService;
 import jakarta.validation.Valid;
 
@@ -25,23 +26,23 @@ public class PsicologoController {
 	private PsicologoService service;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PsicologoDTO> findAll() {
+	public List<PsicologoGetDTO> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PsicologoDTO findById(@PathVariable(value = "id") Long id) {
+	public PsicologoGetDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PsicologoDTO create(@Valid @RequestBody() PsicologoDTO dto) {
+	public PsicologoGetDTO create(@Valid @RequestBody() PsicologoPostDTO dto) {
 		return service.create(dto);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PsicologoDTO update(@RequestBody() PsicologoDTO dto) {
+	public PsicologoGetDTO update(@RequestBody() PsicologoPostDTO dto) {
 		return service.update(dto);
 	}
 

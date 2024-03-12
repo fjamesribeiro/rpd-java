@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.james.dtos.PacienteDTO;
+import br.com.james.dtos.paciente.PacienteDTO;
 import br.com.james.services.PacienteService;
 import br.com.james.services.PsicologoService;
 import jakarta.servlet.http.HttpSession;

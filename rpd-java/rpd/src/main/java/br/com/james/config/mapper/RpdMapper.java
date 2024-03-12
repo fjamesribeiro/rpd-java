@@ -2,12 +2,14 @@ package br.com.james.config.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import br.com.james.dtos.RpdDTO;
+import br.com.james.dtos.rpd.RpdGetDTO;
 import br.com.james.models.Rpd;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = { PacienteMapper.class, HumorMapper.class,
-		SentimentoMapper.class, FisiologiaMapper.class })
-public interface RpdMapper extends DataMapper<RpdDTO, Rpd> {
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,componentModel = MappingConstants.ComponentModel.SPRING)
+public interface RpdMapper {
+
+	RpdGetDTO toDto(Rpd rpd);
 
 }

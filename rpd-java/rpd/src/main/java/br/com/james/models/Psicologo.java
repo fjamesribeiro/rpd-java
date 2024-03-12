@@ -13,11 +13,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "psicologo")
 @Getter
 @Setter
+@NoArgsConstructor
 @PrimaryKeyJoinColumn(name="id")
 @OnDelete(action = OnDeleteAction.CASCADE) 
 public class Psicologo extends Usuario implements Serializable {

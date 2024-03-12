@@ -1,4 +1,4 @@
-package br.com.james.dtos;
+package br.com.james.dtos.humor;
 
 import java.io.Serializable;
 
@@ -9,19 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FisiologiaDTO implements Serializable {
+public class HumorSlimDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
 	private String texto;
-
-//	private Set<RpdDTO> rpds;
-
-	@Override
-	public String toString() {
-		return this.getId().toString();
-	}
 
 }

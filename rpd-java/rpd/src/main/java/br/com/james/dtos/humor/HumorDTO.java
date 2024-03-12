@@ -1,11 +1,10 @@
-package br.com.james.dtos;
+package br.com.james.dtos.humor;
 
 import java.io.Serializable;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import br.com.james.dtos.rpd.RpdGetDTO;
+import br.com.james.dtos.sentimento.SentimentoSlimDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,9 +20,7 @@ public class HumorDTO implements Serializable {
 
 	private String texto;
 
-//	@JsonIgnore
-//	private Set<RpdDTO> rpds;
-//
-	@JsonIgnore
-	private Set<SentimentoDTO> sentimentos;
+	private Set<RpdGetDTO> rpds;
+
+	private Set<SentimentoSlimDTO> sentimentos;
 }

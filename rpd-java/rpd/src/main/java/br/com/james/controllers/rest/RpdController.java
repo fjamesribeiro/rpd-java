@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dtos.RpdDTO;
+import br.com.james.dtos.rpd.RpdGetDTO;
 import br.com.james.services.RpdService;
 import jakarta.servlet.http.HttpSession;
 
@@ -25,23 +25,23 @@ public class RpdController {
 	private RpdService service;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<RpdDTO> findAll() {
+	public List<RpdGetDTO> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO findById(@PathVariable(value = "id") Long id) {
+	public RpdGetDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO create(HttpSession session, @RequestBody() RpdDTO dto) throws Exception {
+	public RpdGetDTO create(HttpSession session, @RequestBody() RpdGetDTO dto) throws Exception {
 		return service.create(session, dto);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO update(@RequestBody() RpdDTO dto) {
+	public RpdGetDTO update(@RequestBody() RpdGetDTO dto) {
 		return service.update(dto);
 	}
 

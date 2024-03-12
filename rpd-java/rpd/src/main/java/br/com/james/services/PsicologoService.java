@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.PsicologoMapper;
-import br.com.james.dtos.PsicologoDTO;
+import br.com.james.dtos.psicologo.PsicologoGetDTO;
+import br.com.james.dtos.psicologo.PsicologoPostDTO;
+import br.com.james.dtos.psicologo.PsicologoSlimDTO;
+import br.com.james.models.Psicologo;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PsicologoRepository;
 import br.com.james.repositories.RoleRepository;
@@ -31,7 +34,7 @@ public class PsicologoService {
 	@Autowired
 	private PsicologoMapper psicologoMapper;
 
-	public List<PsicologoDTO> findAll() {
+	public List<PsicologoGetDTO> findAll() {
 		log.info("Finding All Psicologos");
 
 		var ret = repository.findAll();
@@ -41,7 +44,7 @@ public class PsicologoService {
 		return ret2;
 	}
 
-	public PsicologoDTO findById(Long id) {
+	public PsicologoGetDTO findById(Long id) {
 		log.info("Finding One Psicologo");
 
 		var ret = repository.findById(id)
@@ -52,7 +55,7 @@ public class PsicologoService {
 		return ret2;
 	}
 
-	public PsicologoDTO findByEmail(String email) {
+	public PsicologoGetDTO findByEmail(String email) {
 		log.info("Finding One Psicologo");
 
 		var ret = repository.findByEmail(email)
@@ -63,25 +66,27 @@ public class PsicologoService {
 		return ret2;
 	}
 
-	public PsicologoDTO create(PsicologoDTO dto) {
+	public PsicologoPostDTO create(PsicologoPostDTO dto) {
 		log.info("Creating One Psicologo");
 		var ent = psicologoMapper.toEntity(dto);
 		ent.setSenha(encoder.encode(dto.getSenha()));
 		var role = roleRepository.findByNome(RoleName.PSC);
 		ent.setRoles(Set.of(role));
-		var ret = psicologoMapper.toDto(repository.save(ent));
+		var ret = psicologoMapper.toPostDto(repository.save(ent));
 		return ret;
 	}
 
-	public PsicologoDTO update(PsicologoDTO dto) {
+	public PsicologoGetDTO update(PsicologoPostDTO dto) {
 		log.info("Updating One Psicologo");
 
 		repository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		var ent = psicologoMapper.toEntity(dto);
+		Psicologo psicologo =  new Psicologo();
+		
+		psicologoMapper.update(psicologo, dto);
 
-		return psicologoMapper.toDto(repository.save(ent));
+		return psicologoMapper.toDto(repository.save(psicologo));
 	}
 
 	public void delete(Long id) {

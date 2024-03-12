@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.FisiologiaMapper;
 import br.com.james.config.mapper.RpdMapper;
-import br.com.james.dtos.RpdDTO;
+import br.com.james.dtos.rpd.RpdGetDTO;
 import br.com.james.repositories.FisiologiaRepository;
 import br.com.james.repositories.HumorRepository;
 import br.com.james.repositories.PacienteRepository;
@@ -46,7 +46,7 @@ public class RpdService {
 	@Autowired
 	private FisiologiaMapper fisiologiaMapper;
 
-	public List<RpdDTO> findAll() {
+	public List<RpdGetDTO> findAll() {
 		log.info("Finding All Rpds");
 
 		var ret = repository.findAll();
@@ -56,7 +56,7 @@ public class RpdService {
 		return ret2;
 	}
 
-	public RpdDTO findById(Long id) {
+	public RpdGetDTO findById(Long id) {
 		log.info("Finding One Rpd");
 		var ret = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
@@ -66,7 +66,7 @@ public class RpdService {
 		return ret2;
 	}
 
-	public RpdDTO create(HttpSession session, RpdDTO dto) throws Exception {
+	public RpdGetDTO create(HttpSession session, RpdGetDTO dto) throws Exception {
 		log.info("Creating One Rpd");
 
 		var rpd = rpdMapper.toEntity(dto);
@@ -96,7 +96,7 @@ public class RpdService {
 
 	}
 
-	public RpdDTO update(RpdDTO dto) {
+	public RpdGetDTO update(RpdGetDTO dto) {
 		log.info("Updating One Rpd");
 
 		var ent = repository.findById(dto.getId())

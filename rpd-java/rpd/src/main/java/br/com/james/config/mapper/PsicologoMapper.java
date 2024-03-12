@@ -3,15 +3,24 @@ package br.com.james.config.mapper;
 import java.util.List;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 
-import br.com.james.dtos.PsicologoDTO;
+import br.com.james.dtos.psicologo.PsicologoGetDTO;
+import br.com.james.dtos.psicologo.PsicologoPostDTO;
 import br.com.james.models.Psicologo;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = PacienteMapper.class)
-public interface PsicologoMapper extends DataMapper<PsicologoDTO, Psicologo> {
+@Mapper(map  = CollectionMappingStrategy.ACCESSOR_ONLY, componentModel = MappingConstants.ComponentModel.SPRING)
+public interface PsicologoMapper {
 
-	List<PsicologoDTO> toDto(List<Psicologo> entityList);
+	PsicologoGetDTO toDto(Psicologo psicologo);
 
-	PsicologoDTO toDto(Psicologo entity);
+	PsicologoPostDTO toPostDto(Psicologo psicologo);
+
+	void update(@MappingTarget Psicologo psicologo, PsicologoPostDTO dto);
+
+	Psicologo toEntity(PsicologoGetDTO psicologo);
+
+	Psicologo toEntity(PsicologoPostDTO psicologo);
+
+	List<PsicologoGetDTO> toDto(List<Psicologo> psicologos);
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.james.dtos.RpdDTO;
+import br.com.james.dtos.rpd.RpdGetDTO;
 import br.com.james.repositories.FisiologiaRepository;
 import br.com.james.repositories.HumorRepository;
 import br.com.james.repositories.SentimentoRepository;
@@ -38,7 +38,7 @@ public class RpdControllerView {
 	@GetMapping("/create")
 	public ModelAndView create() {
 		ModelAndView andView = new ModelAndView("/rpd/create");
-		RpdDTO dto = new RpdDTO();
+		RpdGetDTO dto = new RpdGetDTO();
 
 //		// TODO: remove o 1L
 //		var listSentimentos = sentimentoService.findAllByHumorId(1L);
@@ -91,7 +91,7 @@ public class RpdControllerView {
 	}
 
 	@PostMapping()
-	public String post(HttpSession session, RpdDTO dto) throws Exception{
+	public String post(HttpSession session, RpdGetDTO dto) throws Exception{
 		if (dto.getId() == null) {
 			service.create(session, dto);
 		} else {

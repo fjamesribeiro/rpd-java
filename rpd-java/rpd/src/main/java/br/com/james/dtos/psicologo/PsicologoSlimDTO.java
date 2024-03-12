@@ -1,6 +1,4 @@
-package br.com.james.dtos;
-
-import java.util.Set;
+package br.com.james.dtos.psicologo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +9,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PacienteDTO extends UsuarioDTO {
+public class PsicologoSlimDTO {
 
-//	private PsicologoDTO psicologo;
+	private Long id;
 
-	private Set<RpdDTO> rpds;
+	private String nome;
+
+	private String sobrenome;
+
+	private String email;
 
 }
