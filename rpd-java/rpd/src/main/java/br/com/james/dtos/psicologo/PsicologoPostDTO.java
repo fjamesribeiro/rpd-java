@@ -1,23 +1,23 @@
 package br.com.james.dtos.psicologo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.annotation.Nullable;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class PsicologoPostDTO {
 
+	@Nullable
 	private Long id;
 
+	@Nullable
 	private String nome;
 
+	@Nullable
 	private String sobrenome;
 
+	@Nullable
 	private String email;
 
+	@Nullable
 	private String senha;
 }

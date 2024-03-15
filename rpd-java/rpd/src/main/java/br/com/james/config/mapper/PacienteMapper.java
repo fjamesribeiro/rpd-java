@@ -3,14 +3,13 @@ package br.com.james.config.mapper;
 import java.util.List;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import br.com.james.dtos.paciente.PacienteDTO;
 import br.com.james.dtos.paciente.PacienteSlimDTO;
 import br.com.james.models.Paciente;
 
-@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,componentModel = "spring")
 public interface PacienteMapper {
 
 	PacienteDTO toDto(Paciente paciente);

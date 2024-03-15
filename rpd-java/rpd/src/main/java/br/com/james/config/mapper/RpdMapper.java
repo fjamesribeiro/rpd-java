@@ -7,7 +7,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import br.com.james.dtos.rpd.RpdGetDTO;
 import br.com.james.models.Rpd;
 
-@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,componentModel = "spring")
 public interface RpdMapper {
 
 	RpdGetDTO toDto(Rpd rpd);

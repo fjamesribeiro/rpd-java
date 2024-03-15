@@ -16,8 +16,9 @@
 	<description>Rpd Online</description>
 	<properties>
 		<java.version>17</java.version>
-		<mapstruct.version>1.5.5.Final</mapstruct.version>
-		<build-helper-maven-plugin.version>3.12.1</build-helper-maven-plugin.version>
+		<mapstruct.version>1.3.1.Final</mapstruct.version>
+		<lombock.version>1.18.26</lombock.version>
+		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 	</properties>
 	<dependencies>
 
@@ -82,26 +83,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-oauth2-jose</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-			<version>1.18.30</version>
-
+			<optional>true</optional>
+			<version>${lombock.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>${mapstruct.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct-processor</artifactId>
 			<version>${mapstruct.version}</version>
 		</dependency>
 
@@ -110,64 +100,39 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>build-info</goal>
-						</goals>
-						<configuration>
-							<additionalProperties>
-								<encoding.source>${project.build.sourceEncoding}</encoding.source>
-								<encoding.reporting>
-									${project.reporting.outputEncoding}</encoding.reporting>
-								<java.release>${maven.compiler.release}</java.release>
-							</additionalProperties>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.12.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>17</source>
+					<target>17</target>
+
 					<annotationProcessorPaths>
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>${mapstruct.version}</version>
-						</path>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.30</version>
+							<version>1.18.26</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.3.1.Final</version>
 						</path>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok-mapstruct-binding</artifactId>
-							<version>0.2.0</version>
+							<version>${lombok-mapstruct-binding.version}</version>
 						</path>
 					</annotationProcessorPaths>
 					<compilerArgs>
 						<compilerArg>
-							-Amapstruct.suppressGeneratorTimestamp=true
-						</compilerArg>
-						<compilerArg>
-							-Amapstruct.suppressGeneratorVersionInfoComment=true
-						</compilerArg>
-						<compilerArg>
 							-Amapstruct.defaultComponentModel=spring
-						</compilerArg>
-						<compilerArg>
-							-Amapstruct.verbose=true
 						</compilerArg>
 					</compilerArgs>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
