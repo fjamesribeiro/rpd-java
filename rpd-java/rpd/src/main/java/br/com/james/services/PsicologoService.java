@@ -78,10 +78,8 @@ public class PsicologoService {
 	public PsicologoGetDTO update(PsicologoPostDTO dto) {
 		log.info("Updating One Psicologo");
 
-		repository.findById(dto.getId())
+		Psicologo psicologo = repository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
-
-		Psicologo psicologo = new Psicologo();
 
 		psicologoMapper.updateEntity(dto, psicologo);
 

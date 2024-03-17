@@ -1,9 +1,17 @@
 package br.com.james.dtos.psicologo;
 
 import jakarta.annotation.Nullable;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class PsicologoPostDTO {
 
 	@Nullable
