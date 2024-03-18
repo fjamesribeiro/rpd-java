@@ -13,14 +13,10 @@ import br.com.james.dtos.humor.HumorSlimDTO;
 import br.com.james.dtos.paciente.PacienteSlimDTO;
 import br.com.james.dtos.sentimento.SentimentoSlimDTO;
 import jakarta.persistence.Convert;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-public class RpdGetDTO implements Serializable {
+@Data
+public class RpdDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

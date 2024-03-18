@@ -3,7 +3,7 @@ package br.com.james.dtos.humor;
 import java.io.Serializable;
 import java.util.Set;
 
-import br.com.james.dtos.rpd.RpdGetDTO;
+import br.com.james.dtos.rpd.RpdDTO;
 import br.com.james.dtos.sentimento.SentimentoSlimDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class HumorDTO implements Serializable {
 
 	private String texto;
 
-	private Set<RpdGetDTO> rpds;
+	private Set<RpdDTO> rpds;
 
 	private Set<SentimentoSlimDTO> sentimentos;
 }

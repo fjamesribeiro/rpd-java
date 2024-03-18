@@ -3,15 +3,9 @@ package br.com.james.dtos.psicologo;
 import java.util.Set;
 
 import br.com.james.dtos.paciente.PacienteSlimDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class PsicologoGetDTO {
 
 	private Long id;

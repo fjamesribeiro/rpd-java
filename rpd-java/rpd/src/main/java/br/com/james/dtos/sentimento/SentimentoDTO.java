@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.james.dtos.humor.HumorSlimDTO;
-import br.com.james.dtos.rpd.RpdGetDTO;
+import br.com.james.dtos.rpd.RpdDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +21,7 @@ public class SentimentoDTO implements Serializable {
 
 	private String texto;
 	
-	private Set<RpdGetDTO> rpds;
+	private Set<RpdDTO> rpds;
 
 	private List<HumorSlimDTO> humores;
 

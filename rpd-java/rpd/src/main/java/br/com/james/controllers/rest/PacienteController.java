@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dtos.paciente.PacienteDTO;
+import br.com.james.dtos.paciente.PacienteGetDTO;
+import br.com.james.dtos.paciente.PacientePostDTO;
+import br.com.james.dtos.paciente.PacienteSlimDTO;
 import br.com.james.services.PacienteService;
 
 @RestController
@@ -24,23 +26,23 @@ public class PacienteController {
 	private PacienteService service;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PacienteDTO> findAll() {
+	public List<PacienteGetDTO> findAll() {
 		return service.findAll();
 	}
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO findById(@PathVariable(value = "id") Long id) {
+	public PacienteSlimDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO create(@RequestBody() PacienteDTO dto) {
+	public PacienteSlimDTO create(@RequestBody() PacientePostDTO dto) {
 		return service.create(dto);
 	}
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteDTO update(@RequestBody() PacienteDTO dto) {
+	public PacienteSlimDTO update(@RequestBody() PacientePostDTO dto) {
 		return service.update(dto);
 	}
 

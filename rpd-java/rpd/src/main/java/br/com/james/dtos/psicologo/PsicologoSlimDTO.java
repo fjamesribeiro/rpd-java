@@ -1,14 +1,8 @@
 package br.com.james.dtos.psicologo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class PsicologoSlimDTO {
 
 	private Long id;

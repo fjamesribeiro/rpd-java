@@ -11,12 +11,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "paciente")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @PrimaryKeyJoinColumn(name="id")
 @OnDelete(action = OnDeleteAction.CASCADE) 
 public class Paciente extends Usuario implements Serializable {

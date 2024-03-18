@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.PacienteMapper;
-import br.com.james.dtos.paciente.PacienteDTO;
+import br.com.james.dtos.paciente.PacienteGetDTO;
+import br.com.james.dtos.paciente.PacientePostDTO;
+import br.com.james.dtos.paciente.PacienteSlimDTO;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PacienteRepository;
 import br.com.james.repositories.RoleRepository;
@@ -31,23 +33,23 @@ public class PacienteService {
 	@Autowired
 	private PacienteMapper pacienteMapper;
 
-	public List<PacienteDTO> findAll() {
+	public List<PacienteGetDTO> findAll() {
 		log.info("Finding All Pacientes");
 		var ret = pacienteRepository.findAll();
 		return pacienteMapper.toDto(ret);
 	}
 
-	public PacienteDTO findById(Long id) {
+	public PacienteSlimDTO findById(Long id) {
 		log.info("Finding One Paciente");
 		var ret = pacienteRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID: " + id));
 
-		var ret2 = pacienteMapper.toDto(ret);
+		var ret2 = pacienteMapper.toPacienteSlimDto(ret);
 
 		return ret2;
 	}
 
-	public PacienteDTO create(PacienteDTO dto) {
+	public PacienteSlimDTO create(PacientePostDTO dto) {
 		log.info("Creating One Paciente");
 
 		var ent = pacienteMapper.toEntity(dto);
@@ -55,20 +57,20 @@ public class PacienteService {
 		var role = roleRepository.findByNome(RoleName.PAC);
 		ent.setRoles(Set.of(role));
 
-		var ret = pacienteMapper.toDto(pacienteRepository.save(ent));
+		var ret = pacienteMapper.toPacienteSlimDto(pacienteRepository.save(ent));
 
 		return ret;
 	}
 
-	public PacienteDTO update(PacienteDTO dto) {
+	public PacienteSlimDTO update(PacientePostDTO dto) {
 		log.info("Updating One Paciente");
 
-		pacienteRepository.findById(dto.getId())
+		var paciente = pacienteRepository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		var ent = pacienteMapper.toEntity(dto);
+		pacienteMapper.updateEntity(dto, paciente);
 
-		return pacienteMapper.toDto(pacienteRepository.save(ent));
+		return pacienteMapper.toPacienteSlimDto(pacienteRepository.save(paciente));
 	}
 
 	public void delete(Long id) {

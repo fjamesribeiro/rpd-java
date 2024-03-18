@@ -19,7 +19,7 @@ public interface PsicologoMapper {
 	PsicologoPostDTO toPostDto(Psicologo psicologo);
 
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-	void updateEntity(@MappingTarget PsicologoPostDTO dto, Psicologo psicologo);
+	void updateEntity( PsicologoPostDTO dto, @MappingTarget Psicologo psicologo);
 
 	Psicologo toEntity(PsicologoGetDTO psicologo);
 

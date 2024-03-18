@@ -1,12 +1,12 @@
 package br.com.james.dtos.paciente;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import br.com.james.dtos.psicologo.PsicologoSlimDTO;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class PacienteSlimDTO{
+public class PacientePostDTO {
 
 	private Long id;
 
@@ -14,10 +14,12 @@ public class PacienteSlimDTO{
 
 	private String sobrenome;
 
+	@Email
 	private String email;
-	
-	@JsonBackReference
-	private PsicologoSlimDTO psicologo;
 
+	private String senha;
+
+	@NotBlank
+	private PsicologoSlimDTO psicologo;
 
 }

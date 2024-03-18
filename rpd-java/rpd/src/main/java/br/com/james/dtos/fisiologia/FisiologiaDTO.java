@@ -3,7 +3,7 @@ package br.com.james.dtos.fisiologia;
 import java.io.Serializable;
 import java.util.Set;
 
-import br.com.james.dtos.rpd.RpdGetDTO;
+import br.com.james.dtos.rpd.RpdDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +19,7 @@ public class FisiologiaDTO implements Serializable {
 
 	private String texto;
 
-	private Set<RpdGetDTO> rpds;
+	private Set<RpdDTO> rpds;
 
 	@Override
 	public String toString() {

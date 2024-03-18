@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.james.dtos.paciente.PacienteDTO;
+import br.com.james.dtos.paciente.PacienteGetDTO;
 import br.com.james.services.PacienteService;
 import br.com.james.services.PsicologoService;
 import jakarta.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ public class PacienteControllerView {
 	@GetMapping("/create")
 	public ModelAndView create() {
 		ModelAndView andView = new ModelAndView("/paciente/create");
-		PacienteDTO dto = new PacienteDTO();
+		PacienteGetDTO dto = new PacienteGetDTO();
 		andView.addObject("paciente", dto);
 		return andView;
 	}
@@ -59,7 +59,7 @@ public class PacienteControllerView {
 	}
 
 	@PostMapping()
-	public String post(HttpSession session, PacienteDTO dto) {
+	public String post(HttpSession session, PacienteGetDTO dto) {
 		var psicologo = psicologoService.findById((Long)session.getAttribute("idUsuario"));
 		dto.setPsicologo(psicologo);
 

@@ -1,13 +1,14 @@
 package br.com.james.dtos.paciente;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.Set;
 
 import br.com.james.dtos.psicologo.PsicologoSlimDTO;
+import br.com.james.dtos.rpd.RpdSlimDTO;
 import lombok.Data;
 
 @Data
-public class PacienteSlimDTO{
-
+public class PacienteGetDTO {
+	
 	private Long id;
 
 	private String nome;
@@ -16,8 +17,8 @@ public class PacienteSlimDTO{
 
 	private String email;
 	
-	@JsonBackReference
 	private PsicologoSlimDTO psicologo;
 
+	private Set<RpdSlimDTO> rpds;
 
 }

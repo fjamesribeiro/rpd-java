@@ -65,13 +65,13 @@ public class PsicologoService {
 		return ret2;
 	}
 
-	public PsicologoPostDTO create(PsicologoPostDTO dto) {
+	public PsicologoGetDTO create(PsicologoPostDTO dto) {
 		log.info("Creating One Psicologo");
 		var ent = psicologoMapper.toEntity(dto);
 		ent.setSenha(encoder.encode(dto.getSenha()));
 		var role = roleRepository.findByNome(RoleName.PSC);
 		ent.setRoles(Set.of(role));
-		var ret = psicologoMapper.toPostDto(repository.save(ent));
+		var ret = psicologoMapper.toDto(repository.save(ent));
 		return ret;
 	}
 
