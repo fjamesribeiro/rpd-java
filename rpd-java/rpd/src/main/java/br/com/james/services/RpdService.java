@@ -38,11 +38,11 @@ public class RpdService {
 	private SentimentoRepository sentimentoRepository;
 
 	@Autowired
-	private FisiologiaRepository fisiologiaRepository;	
-	
+	private FisiologiaRepository fisiologiaRepository;
+
 	@Autowired
 	private RpdMapper rpdMapper;
-	
+
 	@Autowired
 	private FisiologiaMapper fisiologiaMapper;
 
@@ -50,7 +50,7 @@ public class RpdService {
 		log.info("Finding All Rpds");
 
 		var ret = repository.findAll();
-		
+
 		var ret2 = rpdMapper.toDto(ret);
 
 		return ret2;
@@ -99,18 +99,12 @@ public class RpdService {
 	public RpdDTO update(RpdDTO dto) {
 		log.info("Updating One Rpd");
 
-		var ent = repository.findById(dto.getId())
+		var rpd = repository.findById(dto.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
 
-		ent.setData(dto.getData());
-		ent.setComportamento(dto.getComportamento());
-//		ent.setHumor(dto.getHumor());
-//		ent.setSentimentos(rpdMapper.mapAllSet(dto.getSentimentos(), Sentimento.class));
-//		ent.setFisiologias(fisiologiaMapper.toEntity(dto.getFisiologias()));
-		ent.setSituacao(dto.getSituacao());
-		ent.setPensamento(dto.getPensamento());
+		rpdMapper.updateEntity(dto, rpd);
 
-		return rpdMapper.toDto(repository.save(ent));
+		return rpdMapper.toDto(repository.save(rpd));
 	}
 
 	public void delete(Long id) {

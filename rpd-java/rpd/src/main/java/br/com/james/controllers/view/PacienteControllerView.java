@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.james.config.mapper.PsicologoMapper;
 import br.com.james.dtos.paciente.PacienteGetDTO;
+import br.com.james.dtos.paciente.PacientePostDTO;
 import br.com.james.services.PacienteService;
 import br.com.james.services.PsicologoService;
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +24,9 @@ public class PacienteControllerView {
 
 	@Autowired
 	private PsicologoService psicologoService;
+	
+	@Autowired
+	private PsicologoMapper mapper;
 
 	@GetMapping("/create")
 	public ModelAndView create() {
@@ -59,9 +64,9 @@ public class PacienteControllerView {
 	}
 
 	@PostMapping()
-	public String post(HttpSession session, PacienteGetDTO dto) {
+	public String post(HttpSession session, PacientePostDTO dto) {
 		var psicologo = psicologoService.findById((Long)session.getAttribute("idUsuario"));
-		dto.setPsicologo(psicologo);
+		dto.setPsicologo(mapper.dtoTodto(psicologo) );
 
 		if (dto.getId() == null) {
 			service.create(dto);

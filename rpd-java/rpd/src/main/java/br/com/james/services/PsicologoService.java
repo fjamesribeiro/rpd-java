@@ -11,6 +11,7 @@ import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.PsicologoMapper;
 import br.com.james.dtos.psicologo.PsicologoGetDTO;
 import br.com.james.dtos.psicologo.PsicologoPostDTO;
+import br.com.james.dtos.psicologo.PsicologoSlimDTO;
 import br.com.james.models.Psicologo;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PsicologoRepository;

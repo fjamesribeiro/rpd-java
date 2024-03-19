@@ -9,6 +9,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import br.com.james.dtos.psicologo.PsicologoGetDTO;
 import br.com.james.dtos.psicologo.PsicologoPostDTO;
+import br.com.james.dtos.psicologo.PsicologoSlimDTO;
 import br.com.james.models.Psicologo;
 
 @Mapper(componentModel = "spring")
@@ -17,6 +18,10 @@ public interface PsicologoMapper {
 	PsicologoGetDTO toDto(Psicologo psicologo);
 
 	PsicologoPostDTO toPostDto(Psicologo psicologo);
+	
+	PsicologoSlimDTO dtoTodto(PsicologoGetDTO dto);
+	
+	PsicologoSlimDTO toSlimDTO(Psicologo psicologo);
 
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	void updateEntity( PsicologoPostDTO dto, @MappingTarget Psicologo psicologo);

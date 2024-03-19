@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.james.dtos.psicologo.PsicologoGetDTO;
+import br.com.james.dtos.psicologo.PsicologoPostDTO;
 import br.com.james.services.PsicologoService;
 
 @Controller
@@ -49,7 +50,7 @@ public class PsicologoControllerView {
 	}
 
 	@PostMapping()
-	public String post(PsicologoGetDTO dto) {
+	public String post(PsicologoPostDTO dto) {
 		if (dto.getId() == null) {
 			service.create(dto);
 		} else {
