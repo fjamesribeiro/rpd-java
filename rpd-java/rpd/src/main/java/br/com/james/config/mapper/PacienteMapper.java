@@ -7,27 +7,23 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import br.com.james.dtos.paciente.PacienteGetDTO;
-import br.com.james.dtos.paciente.PacientePostDTO;
+import br.com.james.dtos.paciente.PacienteDTO;
 import br.com.james.dtos.paciente.PacienteSlimDTO;
 import br.com.james.models.Paciente;
 
 @Mapper(componentModel = "spring")
 public interface PacienteMapper {
 
-	PacienteGetDTO toDto(Paciente paciente);
+	PacienteDTO toDto(Paciente paciente);
 
-	PacientePostDTO toPostDto(Paciente paciente);
-
-	List<PacienteGetDTO> toDto(List<Paciente> pacientes);
-
-	Paciente toEntity(PacienteGetDTO pacienteDto);
+	List<PacienteDTO> toDto(List<Paciente> pacientes);
 	
-	Paciente toEntity(PacientePostDTO pacienteDto);
+	PacienteSlimDTO toPacienteSlimDto(Paciente paciente);
+	
+	Paciente toEntity(PacienteDTO pacienteDto);
 
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-	void updateEntity(PacientePostDTO dto, @MappingTarget Paciente paciente);
+	void updateEntity(PacienteDTO dto, @MappingTarget Paciente paciente);
 
-	PacienteSlimDTO toPacienteSlimDto(Paciente paciente);
 
 }

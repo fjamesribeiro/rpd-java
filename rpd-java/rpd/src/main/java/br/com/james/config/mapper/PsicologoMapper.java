@@ -7,28 +7,23 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import br.com.james.dtos.psicologo.PsicologoGetDTO;
-import br.com.james.dtos.psicologo.PsicologoPostDTO;
+import br.com.james.dtos.psicologo.PsicologoDTO;
 import br.com.james.dtos.psicologo.PsicologoSlimDTO;
 import br.com.james.models.Psicologo;
 
 @Mapper(componentModel = "spring")
 public interface PsicologoMapper {
 
-	PsicologoGetDTO toDto(Psicologo psicologo);
+	PsicologoDTO toDto(Psicologo psicologo);
 
-	PsicologoPostDTO toPostDto(Psicologo psicologo);
-	
-	PsicologoSlimDTO dtoTodto(PsicologoGetDTO dto);
-	
 	PsicologoSlimDTO toSlimDTO(Psicologo psicologo);
 
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-	void updateEntity( PsicologoPostDTO dto, @MappingTarget Psicologo psicologo);
+	void updateEntity( PsicologoDTO dto, @MappingTarget Psicologo psicologo);
 
-	Psicologo toEntity(PsicologoGetDTO psicologo);
+	Psicologo toEntity(PsicologoDTO psicologo);
 
-	Psicologo toEntity(PsicologoPostDTO psicologo);
+	Psicologo toEntity(PsicologoSlimDTO psicologo);
 
-	List<PsicologoGetDTO> toDto(List<Psicologo> psicologos);
+	List<PsicologoDTO> toDto(List<Psicologo> psicologos);
 }

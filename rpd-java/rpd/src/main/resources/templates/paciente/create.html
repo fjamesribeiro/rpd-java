@@ -9,6 +9,8 @@
 	<div class="container">
 		<form method="post" action="/pac" th:object="${paciente}">
 
+			<input type="hidden" th:field="*{id}">
+
 			<div class="mb-3">
 				<label for="firstName" class="form-label">Nome</label>
 				<input type="text" class="form-control" th:field="*{nome}" />
@@ -22,6 +24,11 @@
 			<div class="mb-3">
 				<label for="email" class="form-label">Email</label>
 				<input type="email" class="form-control" th:field="*{email}" />
+			</div>
+
+			<div class="mb-3">
+				<label for="senha" class="form-label">Senha</label>
+				<input type="password" class="form-control" th:field="*{senha}" />
 			</div>
 
 			<button type="submit" class="btn btn-primary">Submit</button>

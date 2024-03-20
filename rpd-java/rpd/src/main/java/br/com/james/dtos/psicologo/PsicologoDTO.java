@@ -6,7 +6,7 @@ import br.com.james.dtos.paciente.PacienteSlimDTO;
 import lombok.Data;
 
 @Data
-public class PsicologoGetDTO {
+public class PsicologoDTO {
 
 	private Long id;
 
@@ -15,6 +15,8 @@ public class PsicologoGetDTO {
 	private String sobrenome;
 
 	private String email;
+	
+	private String senha;
 
 	private Set<PacienteSlimDTO> pacientes;
 }

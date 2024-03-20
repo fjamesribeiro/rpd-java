@@ -13,36 +13,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.james.dtos.paciente.PacienteGetDTO;
-import br.com.james.dtos.paciente.PacientePostDTO;
-import br.com.james.dtos.paciente.PacienteSlimDTO;
+import br.com.james.dtos.paciente.PacienteDTO;
+import br.com.james.dtos.paciente.PacienteDTO;
 import br.com.james.services.PacienteService;
+import br.com.james.services.PsicologoService;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/rest/pac")
 public class PacienteController {
 
 	@Autowired
-	private PacienteService service;
+	private PacienteService service;	
+	
+	@Autowired
+	private PsicologoService psicologoService;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PacienteGetDTO> findAll() {
+	public List<PacienteDTO> findAll() {
 		return service.findAll();
 	}
-	
+
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteSlimDTO findById(@PathVariable(value = "id") Long id) {
+	public PacienteDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteSlimDTO create(@RequestBody() PacientePostDTO dto) {
+	public PacienteDTO create(HttpSession session, @RequestBody() PacienteDTO dto) {
+		var psicologo = psicologoService.findById((Long) session.getAttribute("idUsuario"));
+		dto.setPsicologo(psicologo);
 		return service.create(dto);
 	}
-	
+
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PacienteSlimDTO update(@RequestBody() PacientePostDTO dto) {
+	public PacienteDTO update(@RequestBody() PacienteDTO dto) {
 		return service.update(dto);
 	}
 

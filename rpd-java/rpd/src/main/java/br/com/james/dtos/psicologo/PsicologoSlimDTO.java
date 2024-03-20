@@ -13,4 +13,5 @@ public class PsicologoSlimDTO {
 
 	private String email;
 
+	private String senha;
 }

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.james.config.exceptions.ResourceNotFoundException;
 import br.com.james.config.mapper.PsicologoMapper;
-import br.com.james.dtos.psicologo.PsicologoGetDTO;
-import br.com.james.dtos.psicologo.PsicologoPostDTO;
-import br.com.james.dtos.psicologo.PsicologoSlimDTO;
+import br.com.james.dtos.psicologo.PsicologoDTO;
 import br.com.james.models.Psicologo;
 import br.com.james.models.RoleName;
 import br.com.james.repositories.PsicologoRepository;
@@ -34,7 +32,7 @@ public class PsicologoService {
 	@Autowired
 	private PsicologoMapper psicologoMapper;
 
-	public List<PsicologoGetDTO> findAll() {
+	public List<PsicologoDTO> findAll() {
 		log.info("Finding All Psicologos");
 
 		var ret = repository.findAll();
@@ -44,7 +42,7 @@ public class PsicologoService {
 		return ret2;
 	}
 
-	public PsicologoGetDTO findById(Long id) {
+	public PsicologoDTO findById(Long id) {
 		log.info("Finding One Psicologo");
 
 		var ret = repository.findById(id)
@@ -55,7 +53,7 @@ public class PsicologoService {
 		return ret2;
 	}
 
-	public PsicologoGetDTO findByEmail(String email) {
+	public PsicologoDTO findByEmail(String email) {
 		log.info("Finding One Psicologo");
 
 		var ret = repository.findByEmail(email)
@@ -66,7 +64,7 @@ public class PsicologoService {
 		return ret2;
 	}
 
-	public PsicologoGetDTO create(PsicologoPostDTO dto) {
+	public PsicologoDTO create(PsicologoDTO dto) {
 		log.info("Creating One Psicologo");
 		var ent = psicologoMapper.toEntity(dto);
 		ent.setSenha(encoder.encode(dto.getSenha()));
@@ -76,7 +74,7 @@ public class PsicologoService {
 		return ret;
 	}
 
-	public PsicologoGetDTO update(PsicologoPostDTO dto) {
+	public PsicologoDTO update(PsicologoDTO dto) {
 		log.info("Updating One Psicologo");
 
 		Psicologo psicologo = repository.findById(dto.getId())

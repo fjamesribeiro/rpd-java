@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.james.dtos.psicologo.PsicologoGetDTO;
-import br.com.james.dtos.psicologo.PsicologoPostDTO;
+import br.com.james.dtos.psicologo.PsicologoDTO;
 import br.com.james.services.PsicologoService;
 
 @Controller
@@ -22,7 +21,7 @@ public class PsicologoControllerView {
 	@GetMapping("/create")
 	public ModelAndView create() {
 		ModelAndView andView = new ModelAndView("/psicologo/create");
-		PsicologoGetDTO dto = new PsicologoGetDTO();
+		PsicologoDTO dto = new PsicologoDTO();
 		andView.addObject("psicologo", dto);
 		return andView;
 	}
@@ -50,7 +49,7 @@ public class PsicologoControllerView {
 	}
 
 	@PostMapping()
-	public String post(PsicologoPostDTO dto) {
+	public String post(PsicologoDTO dto) {
 		if (dto.getId() == null) {
 			service.create(dto);
 		} else {

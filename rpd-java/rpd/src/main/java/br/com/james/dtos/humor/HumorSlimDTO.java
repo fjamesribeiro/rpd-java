@@ -2,13 +2,9 @@ package br.com.james.dtos.humor;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class HumorSlimDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -3,15 +3,16 @@ package br.com.james.config.converter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import br.com.james.dtos.sentimento.SentimentoDTO;
+import br.com.james.dtos.sentimento.SentimentoSlimDTO;
 
 @Component
-public class StringToSentimentoConverter implements Converter<String, SentimentoDTO> {
+public class StringToSentimentoConverter implements Converter<String, SentimentoSlimDTO> {
 
 	@Override
-	public SentimentoDTO convert(String source) {		
-		SentimentoDTO sentimento = new SentimentoDTO();
-		sentimento.setId(Long.valueOf(source));
+	public SentimentoSlimDTO convert(String id) {
+		System.out.println("o id é: " + id);
+		SentimentoSlimDTO sentimento = new SentimentoSlimDTO();
+		sentimento.setId(Long.valueOf(id));
 		return sentimento;
 	}
 

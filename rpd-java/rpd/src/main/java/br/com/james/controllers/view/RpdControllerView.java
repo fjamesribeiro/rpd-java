@@ -40,17 +40,14 @@ public class RpdControllerView {
 		ModelAndView andView = new ModelAndView("/rpd/create");
 		RpdDTO dto = new RpdDTO();
 
-//		// TODO: remove o 1L
-//		var listSentimentos = sentimentoService.findAllByHumorId(1L);
-//		var listHumores = humorService.findAll();
-//		var listFisiologias = fisiologiaService.findAll();
-//		var listPacientes = pacienteService.findAll();
+		var listHumores = humorRepository.findAll();
+		var listSentimentos = sentimentoRepository.findByHumoresId(1L);
+		var listFisiologias = fisiologiaRepository.findAll();
 
-//		andView.addObject("rpd", dto);
-//		andView.addObject("listHumores", listHumores);
-//		andView.addObject("listSentimentos", listSentimentos);
-//		andView.addObject("listFisiologias", listFisiologias);
-//		andView.addObject("listPacientes", listPacientes);
+		andView.addObject("rpd", dto);
+		andView.addObject("listHumores", listHumores);
+		andView.addObject("listSentimentos", listSentimentos);
+		andView.addObject("listFisiologias", listFisiologias);
 
 		return andView;
 	}
@@ -67,19 +64,19 @@ public class RpdControllerView {
 	public ModelAndView edit(@PathVariable("id") Long id) {
 		ModelAndView andView = new ModelAndView("/rpd/create");
 
-//		var rpd = service.findById(id);
-//		var listHumores = humorService.findAll();
-//		var listPacientes = pacienteService.findAll();
-//		var listFisiologias = fisiologiaService.findAll();
-//
-//		// TODO: remove o 1L
-//		var listSentimentos = sentimentoService.findAllByHumorId(1L);
-//
-//		andView.addObject("listFisiologias", listFisiologias);
-//		andView.addObject("listHumores", listHumores);
-//		andView.addObject("rpd", rpd);
-//		andView.addObject("listPacientes", listPacientes);
-//		andView.addObject("listSentimentos", listSentimentos);
+		var rpd = service.findById(id);
+		var listHumores = humorService.findAll();
+		var listPacientes = pacienteService.findAll();
+		var listFisiologias = fisiologiaService.findAll();
+
+		 TODO: remove o 1L
+		var listSentimentos = sentimentoService.findAllByHumorId(1L);
+
+		andView.addObject("listFisiologias", listFisiologias);
+		andView.addObject("listHumores", listHumores);
+		andView.addObject("rpd", rpd);
+		andView.addObject("listPacientes", listPacientes);
+		andView.addObject("listSentimentos", listSentimentos);
 
 		return andView;
 	}
