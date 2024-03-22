@@ -45,8 +45,7 @@
 								Psicologo
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a th:href="@{/psc/create}"
-										class="dropdown-item">Cadastrar</a></li>
+								<li><a th:href="@{/psc/create}" class="dropdown-item">Cadastrar</a></li>
 								<li><a th:href="@{/psc/list}" class="dropdown-item">Listar</a></li>
 							</ul>
 						</li>
@@ -60,8 +59,7 @@
 								Paciente
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a th:href="@{/pac/create}"
-										class="dropdown-item">Cadastrar</a></li>
+								<li><a th:href="@{/pac/create}" class="dropdown-item">Cadastrar</a></li>
 								<li><a th:href="@{/pac/list}" class="dropdown-item">Listar</a>
 								</li>
 							</ul>
@@ -77,7 +75,7 @@
 							<div sec:authorize="hasAnyAuthority('ADMIN', 'PAC')">
 								<li><a th:href="@{/rpd/create}" class="dropdown-item">Cadastrar</a></li>
 							</div>
-							<li><a th:href="@{/rpd/list}" class="dropdown-item">Listar</a></li>
+							<li><a th:href="@{/rpd/pac/list}" class="dropdown-item">Listar</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -23,7 +23,7 @@
 						<tr th:each="paciente: ${pacientes}">
 							<td th:text="${paciente.id}" />
 							<td th:text="${paciente.nome}" />
-							<td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;"  th:text="${paciente.sobrenome}" />
+							<td th:text="${paciente.sobrenome}" />
 							<td th:text="${paciente.email}" />
 							<td>
 								<a th:href="@{'/pac/edit/'+${paciente.id}}">Editar</a>

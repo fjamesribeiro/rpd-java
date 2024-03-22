@@ -15,12 +15,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity(name = "sentimento")
 public class Sentimento implements Serializable {
 
@@ -39,6 +37,7 @@ public class Sentimento implements Serializable {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "humor_sentimento", joinColumns = @JoinColumn(name = "sentimento_id"), inverseJoinColumns = @JoinColumn(name = "humor_id"))
+	@JsonBackReference
 	private Set<Humor> humores;
 
 }

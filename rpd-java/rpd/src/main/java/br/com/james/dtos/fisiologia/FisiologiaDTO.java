@@ -4,13 +4,9 @@ import java.io.Serializable;
 import java.util.Set;
 
 import br.com.james.dtos.rpd.RpdDTO;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class FisiologiaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

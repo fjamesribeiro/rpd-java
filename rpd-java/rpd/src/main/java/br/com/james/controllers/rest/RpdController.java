@@ -41,8 +41,8 @@ public class RpdController {
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public RpdDTO update(@RequestBody() RpdDTO dto) {
-		return service.update(dto);
+	public RpdDTO update(HttpSession session, @RequestBody() RpdDTO dto) throws Exception {
+		return service.update(session, dto);
 	}
 
 	@DeleteMapping("/{id}")

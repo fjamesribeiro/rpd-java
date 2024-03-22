@@ -2,13 +2,9 @@ package br.com.james.dtos;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class RoleDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

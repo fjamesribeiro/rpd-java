@@ -4,7 +4,18 @@
 <head th:replace="~{fragmentos :: head}" />
 
 <body>
-	<!--	<script>
+	<!--
+	<script>
+		function myFunction() {
+			var x = document.getElementById("humores");
+			if (x.value === "Humor Positivo") {
+				console.log(x.text);
+			} else {
+				console.log(x.text);
+			}
+		}
+	</script>
+		<script>
 		
 		function handleSentimento(humor) {
 			$.ajax({
@@ -23,9 +34,15 @@
 					}
 				}
 			});
-		}-->
+		}
 
 	</script>
+	 <script th:inline="javascript">
+        var minhaLista = /*[[${listSentimentos}]]*/ [];
+              minhaLista.forEach(function(elemento) {
+            console.log(elemento);
+        });
+    </script>-->
 	<header th:replace="~{fragmentos :: header}" />
 
 	<div class="container">
@@ -34,16 +51,19 @@
 
 			<input type="hidden" th:field="*{id}" />
 
+			<input type="hidden" th:field="*{paciente.id}" />
+
 			<div class="mb-3">
 				<label class="form-label" for="data">Data</label>
-				<!--				<input type="date" class="form-control" th:field="*{data}" />
---> 			<input type="hidden" name="data" id="data" value="01/01/2020" />
+				<!--	<input type="date" class="form-control" th:field="*{data}" />-->
+				<input type="hidden" name="data" id="data" value="01/01/2020" />
 			</div>
 
 			<div class="mb-3" role="group">
 				<label for="humores" class="form-label">Como está seu Humor?</label>
 
-				<select class="form-select" id="humores" th:field="*{humor.id}">
+				<select class="form-select" id="humores" th:field="*{humor.id}" onchange="myFunction()">
+					<option hidden value=""></option>
 					<th:block th:each="h : ${listHumores}">
 						<option th:text="${h.texto}" th:value="${h.id}" />
 					</th:block>
@@ -67,10 +87,12 @@
 					<th:block th:each="sentimento : ${listSentimentos}">
 						<div class="form-check form-switch">
 							<input class="form-check-input" type="checkbox" th:field="*{sentimentos}"
-								th:value="${sentimento.id}" />
-							<label class="form-check-label" th:for="${#ids.prev('sentimentos')}"
-								th:text="${sentimento.texto}"></label>
+								th:value="${sentimento.id}"
+								th:checked="${rpd.sentimentos != null and rpd.sentimentos.contains(sentimento)}" />
+							<label class="form-check-label" th:text="${sentimento.texto}"></label>
 						</div>
+					</th:block>
+
 					</th:block>
 				</div>
 			</div>
@@ -82,9 +104,9 @@
 					<th:block th:each="fisilolgia : ${listFisiologias}">
 						<div class="form-check form-switch">
 							<input class="form-check-input" type="checkbox" th:field="*{fisiologias}"
-								th:value="${fisilolgia.id}" />
-							<label class="form-check-label" th:for="${#ids.prev('fisiologias')}"
-								th:text="${fisilolgia.texto}"></label>
+								th:value="${fisilolgia.id}"
+								th:checked="${rpd.getFisiologias() != null and rpd.getFisiologias().contains(fisilolgia)}" />
+							<label class="form-check-label" th:text="${fisilolgia.texto}"></label>
 						</div>
 					</th:block>
 				</div>

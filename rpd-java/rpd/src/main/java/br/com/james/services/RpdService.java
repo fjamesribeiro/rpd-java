@@ -76,16 +76,20 @@ public class RpdService {
 
 		rpd.setPaciente(pac);
 
-		var sent = dto.getSentimentos().stream().map(s -> sentimentoRepository.findById(s.getId()))
-				.flatMap(Optional::stream) // Desembrulhando Optionals e filtrando os valores presentes
-				.collect(Collectors.toSet());
+		if (dto.getSentimentos() != null) {
+			var sent = dto.getSentimentos().stream().map(s -> sentimentoRepository.findById(s.getId()))
+					.flatMap(Optional::stream) // Desembrulhando Optionals e filtrando os valores presentes
+					.collect(Collectors.toSet());
 
-		rpd.setSentimentos(sent);
+			rpd.setSentimentos(sent);
+		}
 
-		var fisio = dto.getFisiologias().stream().map(f -> fisiologiaRepository.findById(f.getId()))
-				.flatMap(Optional::stream).collect(Collectors.toSet());
+		if (dto.getFisiologias() != null) {
+			var fisio = dto.getFisiologias().stream().map(f -> fisiologiaRepository.findById(f.getId()))
+					.flatMap(Optional::stream).collect(Collectors.toSet());
 
-		rpd.setFisiologias(fisio);
+			rpd.setFisiologias(fisio);
+		}
 
 		rpd.setHumor(humorRepository.findById(dto.getHumor().getId())
 				.orElseThrow(() -> new NotFoundException("Humor not found " + dto.getHumor().getId())));
@@ -96,13 +100,33 @@ public class RpdService {
 
 	}
 
-	public RpdDTO update(RpdDTO dto) {
+	public RpdDTO update(HttpSession session, RpdDTO dto) throws Exception {
 		log.info("Updating One Rpd");
 
-		var rpd = repository.findById(dto.getId())
-				.orElseThrow(() -> new ResourceNotFoundException("No record found for this ID: " + dto.getId()));
+		var rpd = rpdMapper.toEntity(dto);
 
-		rpdMapper.updateEntity(dto, rpd);
+		var pac = pacienteRepository.findById((Long) session.getAttribute("idUsuario"))
+				.orElseThrow(() -> new UserPrincipalNotFoundException("User not found"));
+
+		rpd.setPaciente(pac);
+
+		if (dto.getSentimentos() != null) {
+			var sent = dto.getSentimentos().stream().map(s -> sentimentoRepository.findById(s.getId()))
+					.flatMap(Optional::stream) // Desembrulhando Optionals e filtrando os valores presentes
+					.collect(Collectors.toSet());
+
+			rpd.setSentimentos(sent);
+		}
+
+		if (dto.getFisiologias() != null) {
+			var fisio = dto.getFisiologias().stream().map(f -> fisiologiaRepository.findById(f.getId()))
+					.flatMap(Optional::stream).collect(Collectors.toSet());
+
+			rpd.setFisiologias(fisio);
+		}
+
+		rpd.setHumor(humorRepository.findById(dto.getHumor().getId())
+				.orElseThrow(() -> new NotFoundException("Humor not found " + dto.getHumor().getId())));
 
 		return rpdMapper.toDto(repository.save(rpd));
 	}

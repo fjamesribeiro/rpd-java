@@ -1,18 +1,27 @@
 package br.com.james.controllers.view;
 
+import java.util.Comparator;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.james.config.mapper.SentimentoMapper;
+import br.com.james.dtos.paciente.PacienteSlimDTO;
 import br.com.james.dtos.rpd.RpdDTO;
+import br.com.james.dtos.rpd.RpdSlimDTO;
+import br.com.james.models.Sentimento;
 import br.com.james.repositories.FisiologiaRepository;
 import br.com.james.repositories.HumorRepository;
 import br.com.james.repositories.SentimentoRepository;
 import br.com.james.services.PacienteService;
+import br.com.james.services.PsicologoService;
 import br.com.james.services.RpdService;
 import jakarta.servlet.http.HttpSession;
 
@@ -35,6 +44,12 @@ public class RpdControllerView {
 	@Autowired
 	private PacienteService pacienteService;
 
+	@Autowired
+	private PsicologoService psicologoService;
+
+	@Autowired
+	private SentimentoMapper sentimentoMapper;
+
 	@GetMapping("/create")
 	public ModelAndView create() {
 		ModelAndView andView = new ModelAndView("/rpd/create");
@@ -52,11 +67,22 @@ public class RpdControllerView {
 		return andView;
 	}
 
-	@GetMapping("/list")
-	public ModelAndView list() {
-		var ret = service.findAll();
+	@GetMapping("/pac/list")
+	public ModelAndView pacList(HttpSession request) {
+		var pac = pacienteService.findById((Long) request.getAttribute("idUsuario"));
+		var rpds = pac.getRpds().stream().sorted(Comparator.comparing(RpdSlimDTO::getId).reversed());
 		ModelAndView andView = new ModelAndView("/rpd/list");
-		andView.addObject("rpds", ret);
+		andView.addObject("rpds", rpds);
+		return andView;
+	}
+
+	@GetMapping("/psc/list")
+	public ModelAndView pscList(HttpSession request) {
+		var psc = psicologoService.findById((Long) request.getAttribute("idUsuario"));
+		var listPacientes = psc.getPacientes().stream().sorted(Comparator.comparing(PacienteSlimDTO::getNome));
+		ModelAndView andView = new ModelAndView("/rpd/list");
+		andView.addObject("listPacientes", listPacientes);
+//		andView.addObject("rpds", ret);
 		return andView;
 	}
 
@@ -65,21 +91,18 @@ public class RpdControllerView {
 		ModelAndView andView = new ModelAndView("/rpd/create");
 
 		var rpd = service.findById(id);
-		var listHumores = humorService.findAll();
-		var listPacientes = pacienteService.findAll();
-		var listFisiologias = fisiologiaService.findAll();
+		var listHumores = humorRepository.findAll();
+		var listSentimentos = sentimentoMapper.toSlimDto(sentimentoRepository.findByHumoresId(1L));
+		var listFisiologias = fisiologiaRepository.findAll();
 
-		 TODO: remove o 1L
-		var listSentimentos = sentimentoService.findAllByHumorId(1L);
-
+		andView.addObject("rpd", rpd);
 		andView.addObject("listFisiologias", listFisiologias);
 		andView.addObject("listHumores", listHumores);
-		andView.addObject("rpd", rpd);
-		andView.addObject("listPacientes", listPacientes);
 		andView.addObject("listSentimentos", listSentimentos);
 
 		return andView;
 	}
+
 
 	@GetMapping("/del/{id}")
 	public String del(@PathVariable("id") Long id) {
@@ -88,12 +111,12 @@ public class RpdControllerView {
 	}
 
 	@PostMapping()
-	public String post(HttpSession session, RpdDTO dto) throws Exception{
+	public String post(HttpSession session, @ModelAttribute RpdDTO dto) throws Exception {
 		if (dto.getId() == null) {
 			service.create(session, dto);
 		} else {
-			service.update(dto);
+			service.update(session,dto);
 		}
-		return "redirect:/rpd/list";
+		return "redirect:/rpd/pac/list";
 	}
 }

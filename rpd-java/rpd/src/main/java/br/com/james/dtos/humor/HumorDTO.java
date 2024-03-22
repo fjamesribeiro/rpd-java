@@ -5,13 +5,9 @@ import java.util.Set;
 
 import br.com.james.dtos.rpd.RpdDTO;
 import br.com.james.dtos.sentimento.SentimentoSlimDTO;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class HumorDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

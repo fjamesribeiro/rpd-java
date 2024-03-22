@@ -16,9 +16,9 @@ public interface PacienteMapper {
 
 	PacienteDTO toDto(Paciente paciente);
 
+	PacienteSlimDTO toSlimDto(Paciente paciente);
+
 	List<PacienteDTO> toDto(List<Paciente> pacientes);
-	
-	PacienteSlimDTO toPacienteSlimDto(Paciente paciente);
 	
 	Paciente toEntity(PacienteDTO pacienteDto);
 

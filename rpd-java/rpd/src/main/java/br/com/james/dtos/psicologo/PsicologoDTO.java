@@ -2,6 +2,8 @@ package br.com.james.dtos.psicologo;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.james.dtos.paciente.PacienteSlimDTO;
 import lombok.Data;
 
@@ -18,5 +20,6 @@ public class PsicologoDTO {
 	
 	private String senha;
 
+	@JsonBackReference
 	private Set<PacienteSlimDTO> pacientes;
 }

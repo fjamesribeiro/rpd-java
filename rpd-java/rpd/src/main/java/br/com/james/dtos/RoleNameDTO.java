@@ -1,10 +1,8 @@
 package br.com.james.dtos;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public enum RoleNameDTO {
 
 	ADMIN, PSC, PAC;	

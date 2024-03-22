@@ -10,7 +10,6 @@ public class StringToSentimentoConverter implements Converter<String, Sentimento
 
 	@Override
 	public SentimentoSlimDTO convert(String id) {
-		System.out.println("o id é: " + id);
 		SentimentoSlimDTO sentimento = new SentimentoSlimDTO();
 		sentimento.setId(Long.valueOf(id));
 		return sentimento;

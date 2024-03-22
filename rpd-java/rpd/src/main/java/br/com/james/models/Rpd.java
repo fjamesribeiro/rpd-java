@@ -18,14 +18,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity(name = "rpd")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Rpd implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,7 +42,7 @@ public class Rpd implements Serializable {
 
 	@ManyToOne()
 	@JoinColumn(name = "paciente_id", nullable = false)
-	
+	@JsonManagedReference
 	private Paciente paciente;
 
 	@Column(name = "pensamento")
@@ -54,11 +50,12 @@ public class Rpd implements Serializable {
 
 	@ManyToOne()
 	@JoinColumn(name = "humor_id")
-	
+	@JsonManagedReference
 	private Humor humor;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "rpd_fisiologia", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "fisiologia_id"))
+	@JsonManagedReference
 	private Set<Fisiologia> fisiologias;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)

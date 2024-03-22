@@ -2,13 +2,9 @@ package br.com.james.dtos.sentimento;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class SentimentoSlimDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,5 +12,11 @@ public class SentimentoSlimDTO implements Serializable {
 	private Long id;
 
 	private String texto;
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.id.toString();
+	}
 
 }

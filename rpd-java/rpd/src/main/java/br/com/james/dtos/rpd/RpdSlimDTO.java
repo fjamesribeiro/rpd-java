@@ -6,13 +6,9 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.james.dtos.paciente.PacienteSlimDTO;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class RpdSlimDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
