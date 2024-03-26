@@ -22,7 +22,7 @@ public class RpdDTO implements Serializable {
 
 	private Long id;
 
-	@DateTimeFormat(pattern = "dd/MM/YYYY")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 
 	private String situacao;

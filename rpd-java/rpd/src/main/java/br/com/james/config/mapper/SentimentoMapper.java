@@ -1,6 +1,6 @@
 package br.com.james.config.mapper;
 
-import java.util.Set;
+import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
@@ -16,6 +16,6 @@ public interface SentimentoMapper {
 
 	SentimentoSlimDTO toSlimDto(Sentimento sentimento);
 
-	Set<SentimentoSlimDTO> toSlimDto(Set<Sentimento> sentimentos);
+	List<SentimentoSlimDTO> toSlimDto(List<Sentimento> sentimentos);
 
 }

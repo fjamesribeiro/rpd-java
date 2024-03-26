@@ -14,8 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity(name = "humor")
 @Data

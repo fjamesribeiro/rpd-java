@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.james.dtos.paciente.PacienteDTO;
-import br.com.james.dtos.paciente.PacienteDTO;
 import br.com.james.services.PacienteService;
 import br.com.james.services.PsicologoService;
 import jakarta.servlet.http.HttpSession;
@@ -24,8 +23,8 @@ import jakarta.servlet.http.HttpSession;
 public class PacienteController {
 
 	@Autowired
-	private PacienteService service;	
-	
+	private PacienteService service;
+
 	@Autowired
 	private PsicologoService psicologoService;
 
@@ -36,7 +35,8 @@ public class PacienteController {
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PacienteDTO findById(@PathVariable(value = "id") Long id) {
-		return service.findById(id);
+		var pac = service.findById(id);
+		return pac;
 
 	}
 

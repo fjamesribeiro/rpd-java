@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,14 +20,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@PrimaryKeyJoinColumn(name="id")
-@OnDelete(action = OnDeleteAction.CASCADE) 
+@PrimaryKeyJoinColumn(name = "id")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Psicologo extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@OneToMany(mappedBy = "psicologo")
+	@OrderBy("nome")
 	private Set<Paciente> pacientes;
 
-	
 }

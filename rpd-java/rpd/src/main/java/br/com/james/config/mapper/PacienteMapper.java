@@ -1,5 +1,6 @@
 package br.com.james.config.mapper;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.mapstruct.BeanMapping;
@@ -18,12 +19,11 @@ public interface PacienteMapper {
 
 	PacienteSlimDTO toSlimDto(Paciente paciente);
 
-	List<PacienteDTO> toDto(List<Paciente> pacientes);
-	
+	LinkedList<PacienteDTO> toDto(List<Paciente> pacientes);
+
 	Paciente toEntity(PacienteDTO pacienteDto);
 
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	void updateEntity(PacienteDTO dto, @MappingTarget Paciente paciente);
-
 
 }

@@ -1,4 +1,4 @@
-package br.com.james.dtos;
+package br.com.james.dtos.role;
 
 import java.io.Serializable;
 

@@ -18,6 +18,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OrderBy;
 import lombok.Data;
 
 @Entity(name = "rpd")
@@ -31,7 +32,7 @@ public class Rpd implements Serializable {
 	private Long id;
 
 	@Column(name = "data")
-	@DateTimeFormat(pattern = "dd/MM/YYYY")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 
 	@Column(name = "situacao")
@@ -43,6 +44,7 @@ public class Rpd implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name = "paciente_id", nullable = false)
 	@JsonManagedReference
+	@OrderBy("nome")
 	private Paciente paciente;
 
 	@Column(name = "pensamento")
@@ -51,15 +53,16 @@ public class Rpd implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name = "humor_id")
 	@JsonManagedReference
+	@OrderBy("texto")
 	private Humor humor;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "rpd_fisiologia", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "fisiologia_id"))
-	@JsonManagedReference
+	@OrderBy("texto")
 	private Set<Fisiologia> fisiologias;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)
-	@JsonManagedReference
-	@JoinTable(name = "rpd_sentimento", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "sentimento_id"))	
+	@JoinTable(name = "rpd_sentimento", joinColumns = @JoinColumn(name = "rpd_id"), inverseJoinColumns = @JoinColumn(name = "sentimento_id"))
+	@OrderBy("texto")
 	private Set<Sentimento> sentimentos;
 }

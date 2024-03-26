@@ -1,0 +1,85 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos :: head}" />
+
+<body>
+
+	<script th:inline="javascript">
+
+		function filtrarPaciente() {
+			// Obtém o ID do paciente selecionado
+			var pacienteSelecionado = document.getElementById("pacientes").value;
+
+			// Verifica se algum paciente foi selecionado
+			if (pacienteSelecionado) {
+				// Faz uma requisição AJAX para buscar os rpd associados ao paciente selecionado
+				fetch('/rest/rpd/pac/' + pacienteSelecionado)
+					.then(response => response.json())
+					.then(rpds => {
+						// Cria a tabela de rpd
+						var table = document.createElement("table");
+						table.className = "table table-striped";
+						var thead = table.createTHead();
+						var tbody = table.createTBody();
+						var headerRow = thead.insertRow();
+						headerRow.innerHTML = "<th scope='col'>#</th><th scope='col'>Data</th><th scope='col'>Humor</th><th scope='col'>Situação</th><th scope='col'>Pensamento</th><th scope='col'>#</th>";
+
+						// Adiciona os rpd à tabela
+						rpds.forEach(rpd => {
+							var row = tbody.insertRow();
+							row.innerHTML = "<td>" + rpd.id + "</td><td>" + formatarData(rpd.data) + "</td><td>" + rpd.humor.texto + "</td><td>" + rpd.situacao + "</td><td>" + rpd.pensamento + "</td><td> <a href='/rpd/psc/list/" + rpd.id + "'>Visualizar</a></td>";
+						});
+
+						// Remove a tabela de rpd anterior, se existir
+						var rpdsContainer = document.getElementById("rpd-container");
+						rpdsContainer.innerHTML = "";
+
+						// Adiciona a nova tabela de rpd ao contêiner
+						rpdsContainer.appendChild(table);
+					})
+					.catch(error => console.error('Erro ao obter rpd:', error));
+			} else {
+				// Remove a tabela de rpd do contêiner se nenhum paciente for selecionado
+				var rpdsContainer = document.getElementById("rpd-container");
+				rpdsContainer.innerHTML = "";
+			}
+		}
+
+
+		function formatarData(data) {
+			var dataObj = new Date(data);
+			var dia = String(dataObj.getDate()).padStart(2, '0');
+			var mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+			var ano = dataObj.getFullYear();
+			return dia + '/' + mes + '/' + ano;
+		}
+
+	</script>
+
+
+	<header th:replace="~{fragmentos :: header}" />
+	<div class="container">
+
+		<div class="mb-3" role="group">
+			<label for="pacientes" class="form-label">Selecione o Paciente</label>
+			<select class="form-select" id="pacientes" onchange="filtrarPaciente()">
+				<option hidden value=""></option>
+				<th:block th:each="h : ${listPacientes}">
+					<option th:text="${h.nome + ' ' + h.sobrenome}" th:value="${h.id}" />
+				</th:block>
+			</select>
+		</div>
+
+		<div class="mb-3" role="group" id="rpd-container">
+			<!-- Aqui será adicionada a tabela de rpd vis JS-->
+		</div>
+
+		<div class="mb-3" role="group">
+			<button type="button" class="btn btn-primary" onclick="window.history.back()">Voltar</button>
+		</div>
+
+	</div>
+</body>
+
+</html>

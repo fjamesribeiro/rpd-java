@@ -66,18 +66,30 @@
 						</li>
 					</div>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							RPD
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<div sec:authorize="hasAnyAuthority('ADMIN', 'PAC')">
+					<div sec:authorize="hasAnyAuthority('ADMIN', 'PAC')">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								RPD
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<li><a th:href="@{/rpd/create}" class="dropdown-item">Cadastrar</a></li>
-							</div>
-							<li><a th:href="@{/rpd/pac/list}" class="dropdown-item">Listar</a></li>
-						</ul>
-					</li>
+								<li><a th:href="@{/rpd/pac/list}" class="dropdown-item">Listar</a></li>
+							</ul>
+						</li>
+					</div>
+
+					<div sec:authorize="hasAnyAuthority('ADMIN', 'PSC')">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								RPD
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a th:href="@{/rpd/psc/list}" class="dropdown-item">Listar</a></li>
+							</ul>
+						</li>
+					</div>
 				</ul>
 			</div>
 

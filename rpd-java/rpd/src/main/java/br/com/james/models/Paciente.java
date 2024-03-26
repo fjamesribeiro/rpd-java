@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,19 +24,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name="id")
-@OnDelete(action = OnDeleteAction.CASCADE) 
+@PrimaryKeyJoinColumn(name = "id")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Paciente extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
-	@JoinColumn(name = "psicologo_id") 
+	@JoinColumn(name = "psicologo_id")
 	private Psicologo psicologo;
-	
+
 	@OneToMany(mappedBy = "paciente")
+	@OrderBy("id DESC")
 	@JsonBackReference
 	private Set<Rpd> rpds;
-
 
 }
