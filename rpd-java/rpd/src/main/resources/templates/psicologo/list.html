@@ -6,34 +6,28 @@
 <body>
 	<header th:replace="~{fragmentos :: header}" />
 	<div class="container">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Sobrenome</th>
-					<th scope="col">Email</th>
-					<th scope="col">#</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="psicologo: ${psicologos}">
-					<td th:text="${psicologo.id}" />
-					<td th:text="${psicologo.nome}" />
-					<td th:text="${psicologo.sobrenome}" />
-					<td th:text="${psicologo.email}" />
-					<td>
-						<a th:href="@{'/psc/edit/'+${psicologo.id}}">Editar</a>
-						<a th:href="@{'/psc/del/'+${psicologo.id}}">Excluir</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="container p-5 mb-3">
+			<div class="row">
+				<div th:each="psicologo: ${psicologos}" class="card col-sm-3 text-center mr-3">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${psicologo.nome + ' ' + psicologo.sobrenome}"></h5>
+						<p class="card-text" th:text="${psicologo.email}"></p>
+					</div>
+					<div class="card-body">
+						<a th:href="@{'/psc/edit/'+${psicologo.id}}" class="card-link">Editar</a>
+						<a th:href="@{'/psc/del/'+${psicologo.id}}" class="card-link">Deletar</a>
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 p-3" role="group">
+				<button type="button" class="btn btn-primary" onclick="window.history.back()">
+					Voltar
+				</button>
+			</div>
+		</div>
 	</div>
 
-	<div class="mb-3" role="group">
-		<button type="button" class="btn btn-primary" onclick="window.history.back()">Voltar</button>
-	</div>
+
 </body>
 
 </html>

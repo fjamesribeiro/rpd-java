@@ -1,42 +1,27 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="~{fragmentos :: head}" />
 
 <body>
 	<header th:replace="~{fragmentos :: header}" />
-	<div class="container">
-		<!-- Adiciona uma classe row para definir uma linha do grid -->
+
+	<div class="container p-5">
 		<div class="row">
-			<div class="col-xs-12 col-sm-8 col-md-7 col-lg-5">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Nome</th>
-							<th scope="col">Sobrenome</th>
-							<th scope="col">Email</th>
-							<th scope="col">Psicólogo</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="paciente: ${pacientes}">
-							<td th:text="${paciente.id}" />
-							<td th:text="${paciente.nome}" />
-							<td th:text="${paciente.sobrenome}" />
-							<td th:text="${paciente.email}" />
-							<td>
-								<a th:href="@{'/pac/edit/'+${paciente.id}}">Editar</a>
-								<a th:href="@{'/pac/del/'+${paciente.id}}">Excluir</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			<div th:each="paciente: ${pacientes}" class="card col-sm-3 mb-3 text-center mr-3">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${paciente.nome + ' ' + paciente.sobrenome}"></h5>
+					<p class="card-text" th:text="${paciente.email}"></p>
+				</div>
+				<div class="card-body">
+					<a th:href="@{'/pac/edit/'+${paciente.id}}" class="card-link">Editar</a>
+					<a th:href="@{'/pac/del/'+${paciente.id}}" class="card-link">Deletar</a>
+				</div>
 			</div>
-			
-			<div class="mb-3" role="group">
-				<button type="button" class="btn btn-primary" onclick="window.history.back()">Voltar</button>
-			</div>
+		</div>
+		<div class="mb-3 p-3" role="group">
+			<button type="button" class="btn btn-primary" onclick="window.history.back()">
+				Voltar
+			</button>
 		</div>
 	</div>
 </body>

@@ -11,6 +11,4 @@ public class RpdApplication {
 		SpringApplication.run(RpdApplication.class, args);
 		System.out.println(new BCryptPasswordEncoder().encode("senha123"));
 	}
-
-	
 }
