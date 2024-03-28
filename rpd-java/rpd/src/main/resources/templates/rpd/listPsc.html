@@ -25,7 +25,7 @@
 						// Itera sobre os rpds e adiciona cada um deles ao contêiner
 						rpds.forEach(rpd => {
 							var cardDiv = document.createElement("div");
-							cardDiv.className = "card col-sm-4 text-center mr-3 mb-3";
+							cardDiv.className = "card text-center text-white bg-primary mb-3";
 
 							var cardBodyDiv = document.createElement("div");
 							cardBodyDiv.className = "card-header";
@@ -43,7 +43,7 @@
 							li2.innerText = rpd.situacao;
 
 							var linkElement = document.createElement("a");
-							linkElement.className = "card-link";
+							linkElement.className = "card-link text-white";
 							linkElement.href = "/rpd/psc/list/" + rpd.id;
 							linkElement.innerText = "Visualizar";
 
@@ -83,8 +83,8 @@
 
 
 	<header th:replace="~{fragmentos :: header}" />
-	<div class="container text-center p-5">
-		<div class="row mb-4">
+	<div class="container text-center">
+		<div class="row">
 			<div class="col"></div>
 			<div class="col-6">
 				<label for="pacientes" class="form-label">Selecione o Paciente</label>
@@ -98,7 +98,7 @@
 			<div class="col"></div>
 		</div>
 
-		<div class="row" id="rpd-container"></div>
+		<div class="row p-5" id="rpd-container"></div>
 
 		<div class="row col-3">
 			<div class="mb-3" role="group">
