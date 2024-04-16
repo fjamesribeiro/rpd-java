@@ -25,7 +25,7 @@
 						// Itera sobre os rpds e adiciona cada um deles ao contêiner
 						rpds.forEach(rpd => {
 							var cardDiv = document.createElement("div");
-							cardDiv.className = "card text-center text-white bg-primary mb-3";
+							cardDiv.className = "card text-center text-white bg-primary mb-3 mr-3 col-sm-6";
 
 							var cardBodyDiv = document.createElement("div");
 							cardBodyDiv.className = "card-header";
@@ -42,6 +42,10 @@
 							li2.className = "list-group-item";
 							li2.innerText = rpd.situacao;
 
+							var li3 = document.createElement("li");
+							li3.className = "list-group-item";
+							li3.innerText = rpd.pensamento;
+
 							var linkElement = document.createElement("a");
 							linkElement.className = "card-link text-white";
 							linkElement.href = "/rpd/psc/list/" + rpd.id;
@@ -50,6 +54,7 @@
 							cardBodyDiv.appendChild(ulElement);
 							cardBodyDiv.appendChild(li1);
 							cardBodyDiv.appendChild(li2);
+							cardBodyDiv.appendChild(li3);
 
 							var linkBodyDiv = document.createElement("div");
 							linkBodyDiv.className = "card-body";

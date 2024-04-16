@@ -9,6 +9,6 @@ public class RpdApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RpdApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder().encode("senha123"));
+//		System.out.println(new BCryptPasswordEncoder().encode("senha123"));
 	}
 }
